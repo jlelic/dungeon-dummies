@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource)), RequireComponent(typeof(SpriteRenderer))]
-public abstract class TriggerObject : AdventurerInterest
+public abstract class TriggerObject : CuriousInterest
 {
     [SerializeField] Triggerable objectToTrigger;
     [SerializeField] Sprite offState;
@@ -28,7 +28,4 @@ public abstract class TriggerObject : AdventurerInterest
     {
         objectToTrigger.Trigger();
     }
-
-
-
 }
