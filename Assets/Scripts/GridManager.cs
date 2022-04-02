@@ -64,7 +64,8 @@ public enum TileType
     CHEST = 9,
     URN = 10,
     STATUE = 11,
-    PRESSURE_PLATE = 12
+    PRESSURE_PLATE = 12,
+    LEVER = 13,
 
 }
 
@@ -79,7 +80,8 @@ public class GridManager : MonoBehaviour
         {TileType.LAVA, new TileInfo{Burning = true } },
         {TileType.GROUND, new TileInfo{} },
         {TileType.BRIDGE, new TileInfo{} },
-        {TileType.WALL, new TileInfo{Blocking = true} }
+        {TileType.WALL, new TileInfo{Blocking = true} },
+        {TileType.LEVER, new TileInfo{Blocking = true} },
     };
 
 
