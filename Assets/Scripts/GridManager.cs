@@ -176,7 +176,7 @@ public class GridManager : MonoBehaviour
                 var position = GetWorldPosFromTile(coord);
                 prefab.transform.position = position;
                 var renderer = prefab.GetComponent<SpriteRenderer>();
-                renderer.sortingOrder = 4;
+                renderer.sortingOrder = 6;
             }
         }
     }

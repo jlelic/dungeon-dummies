@@ -21,8 +21,8 @@ public class Adventurer : MonoBehaviour
         Utils.tweenColor(renderer, Color.black, 0.2f);
         Instantiate(BurnParticleEffectPrefab, transform.position, Quaternion.identity, transform);
         iTween.ValueTo(gameObject, iTween.Hash(
-            "delay", 0.3f,
-            "time", 1,
+            //"delay", 0.3f,
+            "time", 0.8f,
             "from", 0f,
             "to", 1f,
             "onupdate", (System.Action<float>)((value) => { renderer.material.SetFloat("_Step", value); }),
