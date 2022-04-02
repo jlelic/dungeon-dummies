@@ -46,6 +46,11 @@ public class Navigation : MonoBehaviour
         }
     }
 
+    public void Stop()
+    {
+        moving = false;
+    }
+
     private void Update()
     {
         if(moving)

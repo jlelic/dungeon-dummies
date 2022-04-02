@@ -12,7 +12,7 @@ public struct TileCoord
         Y = y;
     }
 
-    public string ToString()
+    public override string ToString()
     {
         return X + "x" + Y;
     }
@@ -55,6 +55,16 @@ public enum TileType
     GROUND = 1,
     BRIDGE = 2,
     WALL = 3,
+    PILLAR = 4,
+    PIT = 5,
+    SPIKES = 6,
+    ENEMY_RANGED = 7,
+    ENEMY_MELEE = 8,
+    CHEST = 9,
+    URN = 10,
+    STATUE = 11,
+    PRESSURE_PLATE = 12
+
 }
 
 
@@ -73,8 +83,8 @@ public class GridManager : MonoBehaviour
 
 
     public TileBase lol;
-    public int SizeX = 0;
-    public int SizeY = 0;
+    private int SizeX = 10;
+    private int SizeY = 10;
 
     Dictionary<TileLayer, Tilemap> Tilemaps;
     Grid Grid;
@@ -117,7 +127,7 @@ public class GridManager : MonoBehaviour
             {
                 layer = TileLayer.WALL;
             }
-            else if (name == "bridge")
+            else if (name == "bridge" || name == "interactable")
             {
                 layer = TileLayer.OBJECT;
 
@@ -131,12 +141,13 @@ public class GridManager : MonoBehaviour
                 Debug.LogError("Unknown tile layer: " + name);
             }
             Tilemaps[layer] = map;
-            SizeX = Mathf.Max(map.size.x);
-            SizeY = Mathf.Max(map.size.y);
+            //SizeX = Mathf.Max(map.size.x);
+            //SizeY = Mathf.Max(map.size.y);
         }
-
         InstantiateObjects();
     }
+
+
 
     private void InstantiateObjects()
     {
@@ -145,19 +156,24 @@ public class GridManager : MonoBehaviour
             for (int y = 0; y < SizeY; y++)
             {
                 var coord = new TileCoord(x, y);
-                var tileType = GetTile(coord, TileLayer.OBJECT);
-                if (tileType == TileType.EMPTY)
+                var objectTile = GetTile(coord, TileLayer.OBJECT);
+                var prefab = GetPrefabForTile(objectTile);
+                if (prefab == null)
                 {
-                    continue;
+                    var groundTile = GetTile(coord, TileLayer.GROUND);
+                    if (groundTile == TileType.LAVA)
+                    {
+                        Debug.Log(coord);
+                    }
+                    prefab = GetPrefabForTile(groundTile);
                 }
-                var prefab = GetPrefabForTile(tileType);
+
                 if (prefab == null)
                 {
                     continue;
                 }
                 Instantiate(prefab);
                 var position = GetWorldPosFromTile(coord);
-                Debug.Log(tileType + " at " + coord.ToString());
                 prefab.transform.position = position;
                 var renderer = prefab.GetComponent<SpriteRenderer>();
                 renderer.sortingOrder = 4;
@@ -175,12 +191,6 @@ public class GridManager : MonoBehaviour
         }
         var id = tile.m_TileId;
         return (TileType)id;
-    }
-
-    public bool IsBlockingTile(TileCoord pos)
-    {
-        var result = false;
-        return result;
     }
 
     public Vector3 GetWorldPosFromTile(TileCoord coord)
@@ -209,12 +219,12 @@ public class GridManager : MonoBehaviour
     public bool IsBlocking(TileCoord t)
     {
         var wallTile = GetTile(t, TileLayer.WALL);
-        if (TileInfo[wallTile].Blocking)
+        if (TileInfo.ContainsKey(wallTile) && TileInfo[wallTile].Blocking)
         {
             return true;
         }
         var objectTile = GetTile(t, TileLayer.OBJECT);
-        if (TileInfo[objectTile].Blocking)
+        if (TileInfo.ContainsKey(objectTile) && TileInfo[objectTile].Blocking)
         {
             return true;
         }
@@ -251,7 +261,7 @@ public class GridManager : MonoBehaviour
                 }
                 int nX = f.X + i;
                 int nY = f.Y + j;
-                if(nX < -10 || nY < -10 || nX > 20 || nY > 20)
+                if(nX < -10 || nY < 0 || nX > 20 || nY >= 10)
                 {
                     continue;
                 }
