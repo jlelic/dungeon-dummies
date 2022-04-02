@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class AdventurerInterest : MonoBehaviour
+public abstract class CuriousInterest : MonoBehaviour
 {
     public abstract void Interact();
 }
