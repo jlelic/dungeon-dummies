@@ -6768,6 +6768,10 @@ public class iTween : MonoBehaviour
 			{
 				((Action<Vector2>)tweenArguments[callbackType]).Invoke((Vector2)tweenArguments[callbackType + "params"]);
 			}
+			else if (tweenArguments[callbackType] is Action<Vector3>)
+			{
+				((Action<Vector3>)tweenArguments[callbackType]).Invoke((Vector3)tweenArguments[callbackType + "params"]);
+			}
 			else if (tweenArguments[callbackType] is Action<float>)
 			{
 				((Action<float>)tweenArguments[callbackType]).Invoke((float)tweenArguments[callbackType + "params"]);

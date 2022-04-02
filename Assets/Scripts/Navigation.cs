@@ -31,7 +31,7 @@ public class Navigation : MonoBehaviour
 
     void Navigate(TileCoord target)
     {
-        var start = GridManager.Instance.GetTilePosFromWorld(transform.position);
+        var start = GridManager.Instance.GetTileCoordFromWorld(transform.position);
         var path = CalculatePath(start, target);
         if(path == null)
         {

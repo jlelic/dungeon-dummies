@@ -1658,11 +1658,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 76038237942478322, guid: 2b72a45c22b13cb4aa541daf14386eb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: -1.52
       objectReference: {fileID: 0}
     - target: {fileID: 76038237942478322, guid: 2b72a45c22b13cb4aa541daf14386eb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.65
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 76038237942478322, guid: 2b72a45c22b13cb4aa541daf14386eb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1760,6 +1760,26 @@ PrefabInstance:
     - target: {fileID: 3183824355231699838, guid: 3f43553c3d8c2ff4e9decf5e22949b76, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066869246263375295, guid: 3f43553c3d8c2ff4e9decf5e22949b76, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066869246263375295, guid: 3f43553c3d8c2ff4e9decf5e22949b76, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066869246263375295, guid: 3f43553c3d8c2ff4e9decf5e22949b76, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066869246263375295, guid: 3f43553c3d8c2ff4e9decf5e22949b76, type: 3}
+      propertyPath: m_Color.r
+      value: 0.161767
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066869246263375295, guid: 3f43553c3d8c2ff4e9decf5e22949b76, type: 3}
+      propertyPath: m_SortingOrder
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f43553c3d8c2ff4e9decf5e22949b76, type: 3}

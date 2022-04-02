@@ -24,7 +24,7 @@ public struct TileCoord
 
     public override bool Equals(object obj)
     {
-        if(obj is TileCoord)
+        if (obj is TileCoord)
         {
             var other = (TileCoord)obj;
             return other.X == X && other.Y == Y;
@@ -40,6 +40,7 @@ public struct TileInfo
 {
     public bool Blocking;
     public bool Burning;
+    public bool Hazard;
 }
 
 
@@ -86,6 +87,7 @@ public class GridManager : MonoBehaviour
     private int SizeX = 10;
     private int SizeY = 10;
 
+    Dictionary<TileType, TileBase> Tilebases = new Dictionary<TileType, TileBase>();
     Dictionary<TileLayer, Tilemap> Tilemaps;
     Grid Grid;
 
@@ -111,7 +113,7 @@ public class GridManager : MonoBehaviour
             Destroy(this);
         }
         Grid = FindObjectOfType<Grid>();
-        if(Grid == null)
+        if (Grid == null)
         {
             Debug.LogError("Grid not found");
             return;
@@ -156,36 +158,40 @@ public class GridManager : MonoBehaviour
             for (int y = 0; y < SizeY; y++)
             {
                 var coord = new TileCoord(x, y);
-                var objectTile = GetTile(coord, TileLayer.OBJECT);
-                var prefab = GetPrefabForTile(objectTile);
+                var tileLayer = TileLayer.OBJECT;
+                var tileType = GetTile(coord, tileLayer);
+                var prefab = GetPrefabForTile(tileType);
                 if (prefab == null)
                 {
-                    var groundTile = GetTile(coord, TileLayer.GROUND);
-                    if (groundTile == TileType.LAVA)
-                    {
-                        Debug.Log(coord);
-                    }
-                    prefab = GetPrefabForTile(groundTile);
+                    tileLayer = TileLayer.GROUND;
+                    tileType = GetTile(coord, tileLayer);
+                    prefab = GetPrefabForTile(tileType);
                 }
 
                 if (prefab == null)
                 {
                     continue;
                 }
-                Instantiate(prefab);
+                var newObject = Instantiate(prefab);
+                Tilebases[tileType] = GetTileBase(coord, tileLayer);
                 var position = GetWorldPosFromTile(coord);
-                prefab.transform.position = position;
-                var renderer = prefab.GetComponent<SpriteRenderer>();
+                newObject.transform.position = position;
+                var renderer = newObject.GetComponent<SpriteRenderer>();
                 renderer.sortingOrder = 6;
+                var draggable = newObject.GetComponent<Draggable>();
+                if (draggable != null)
+                {
+                    draggable.AttachTile(tileType, coord, tileLayer);
+                }
             }
         }
     }
 
-    public TileType GetTile(TileCoord pos, TileLayer layer)
+    public TileType GetTile(TileCoord coord, TileLayer layer)
     {
-        var vector = Utils.CoordToVector(pos);
+        var vector = Utils.CoordToVector(coord);
         var tile = ((SuperTiled2Unity.SuperTile)Tilemaps[layer].GetTile(vector));
-        if(tile == null)
+        if (tile == null)
         {
             return TileType.EMPTY;
         }
@@ -193,22 +199,40 @@ public class GridManager : MonoBehaviour
         return (TileType)id;
     }
 
-    public Vector3 GetWorldPosFromTile(TileCoord coord)
+    public TileBase GetTileBase(TileCoord coord, TileLayer layer)
     {
-        return Grid.CellToWorld(Utils.CoordToVector(coord)) + new Vector3(Grid.cellSize.x, -Grid.cellSize.y)/2;
+        var vector = Utils.CoordToVector(coord);
+        return Tilemaps[layer].GetTile(vector);
     }
 
-    public TileCoord GetTilePosFromWorld(Vector3 pos)
+    public void SetTile(TileCoord pos, TileLayer layer, TileType tile)
+    {
+        var vector = Utils.CoordToVector(pos);
+        var tileBase = Tilebases[tile];
+        Tilemaps[layer].SetTile(vector, tileBase);
+    }
+    public void ClearTile(TileCoord pos, TileLayer layer)
+    {
+        var vector = Utils.CoordToVector(pos);
+        Tilemaps[layer].SetTile(vector, null);
+    }
+
+    public Vector3 GetWorldPosFromTile(TileCoord coord)
+    {
+        return Grid.CellToWorld(Utils.CoordToVector(coord)) + new Vector3(Grid.cellSize.x, -Grid.cellSize.y) / 2;
+    }
+
+    public TileCoord GetTileCoordFromWorld(Vector3 pos)
     {
         var vec = Grid.WorldToCell(pos);
-        return new TileCoord(vec.x, -vec.y);
+        return new TileCoord(vec.x, -vec.y - 1);
     }
 
     GameObject GetPrefabForTile(TileType tileType)
     {
         foreach (var t in TileObjectPrefabs)
         {
-            if(t.tileType == tileType)
+            if (t.tileType == tileType)
             {
                 return t.prefab;
             }
@@ -255,13 +279,13 @@ public class GridManager : MonoBehaviour
         {
             for (int j = -1; j < 2; j++)
             {
-                if(i == 0 && j == 0)
+                if (i == 0 && j == 0)
                 {
                     continue;
                 }
                 int nX = f.X + i;
                 int nY = f.Y + j;
-                if(nX < -10 || nY < 0 || nX > 20 || nY >= 10)
+                if (nX < -10 || nY < 0 || nX > 20 || nY >= 10)
                 {
                     continue;
                 }
@@ -272,13 +296,16 @@ public class GridManager : MonoBehaviour
                 }
                 float cost = GetDangerCost(nCoord);
                 // Diagonal
-                if (i != 0 && j != 0 )
+                if (i != 0 && j != 0)
                 {
-                    cost *= 1.44f;
-                    if (IsBlocking(new TileCoord(nX, f.Y)) || IsBlocking(new TileCoord(f.X, nY)))
+                    var corner1 = new TileCoord(nX, f.Y);
+                    var corner2 = new TileCoord(f.X, nY);
+                    if (IsBlocking(corner1) || IsBlocking(corner2))
                     {
                         continue;
                     }
+                    var worseCornerCost = Mathf.Max(GetDangerCost(corner1), GetDangerCost(corner2));
+                    cost = Mathf.Sqrt(cost * cost + worseCornerCost * worseCornerCost);
                 }
                 result.Add(new NavNode(nCoord, cost));
             }

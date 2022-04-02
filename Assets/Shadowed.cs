@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,9 @@ using UnityEngine;
 public class Shadowed : MonoBehaviour
 {
 
-    Vector3 Distance = new Vector3(-0.2f,-0.5f,0);
     GameObject Shadow;
+    bool sticking = true;
+    Vector3 stickWorldPosition;
 
     void Start()
     {
@@ -19,23 +21,41 @@ public class Shadowed : MonoBehaviour
         shadowRenderer.sortingOrder = renderer.sortingOrder - 1;
         Shadow.transform.SetParent(transform);
         Shadow.transform.localPosition = Vector3.zero;
+
+        stickWorldPosition = transform.position;
     }
 
-    public void Unstick()
+    public void Unstick(Vector3 distance)
     {
+        sticking = false;
         iTween.Stop(Shadow);
         iTween.MoveBy(Shadow, iTween.Hash(
-            "amount", Distance,
+            "amount", -distance,
             "time", 0.5f
             ));
     }
 
     public void Stick()
     {
-        iTween.Stop(Shadow);
-        iTween.MoveTo(Shadow, iTween.Hash(
-            "position", transform.position,
-            "time", 0.5f
-            ));
+        sticking = true;
+        stickWorldPosition = Shadow.transform.position;
+    }
+
+    private void Update()
+    {
+        if(sticking)
+        {
+            Shadow.transform.position = stickWorldPosition;
+        }
+    }
+
+    internal void SetShadowPosition(Vector3 position)
+    {
+        Shadow.transform.position = position;
+    }
+
+    internal Vector3 GetShadowPosition()
+    {
+        return Shadow.transform.position;
     }
 }
