@@ -17,6 +17,21 @@ public struct TileCoord
         return X + "x" + Y;
     }
 
+    public override int GetHashCode()
+    {
+        return X * 1000 + Y;
+    }
+
+    public override bool Equals(object obj)
+    {
+        if(obj is TileCoord)
+        {
+            var other = (TileCoord)obj;
+            return other.X == X && other.Y == Y;
+        }
+        return false;
+    }
+
     public int X;
     public int Y;
 }
@@ -45,10 +60,11 @@ public enum TileType
 
 public class GridManager : MonoBehaviour
 {
-    static GridManager Instance;
+    static public GridManager Instance;
 
     static public Dictionary<TileType, TileInfo> TileInfo = new Dictionary<TileType, TileInfo>()
     {
+        {TileType.EMPTY, new TileInfo{} },
         {TileType.LAVA, new TileInfo{Burning = true } },
         {TileType.GROUND, new TileInfo{} },
         {TileType.BRIDGE, new TileInfo{} },
@@ -73,7 +89,7 @@ public class GridManager : MonoBehaviour
     TileObjectPrefab[] TileObjectPrefabs;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -172,6 +188,12 @@ public class GridManager : MonoBehaviour
         return Grid.CellToWorld(Utils.CoordToVector(coord)) + new Vector3(Grid.cellSize.x, -Grid.cellSize.y)/2;
     }
 
+    public TileCoord GetTilePosFromWorld(Vector3 pos)
+    {
+        var vec = Grid.WorldToCell(pos);
+        return new TileCoord(vec.x, -vec.y);
+    }
+
     GameObject GetPrefabForTile(TileType tileType)
     {
         foreach (var t in TileObjectPrefabs)
@@ -182,5 +204,75 @@ public class GridManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public bool IsBlocking(TileCoord t)
+    {
+        var wallTile = GetTile(t, TileLayer.WALL);
+        if (TileInfo[wallTile].Blocking)
+        {
+            return true;
+        }
+        var objectTile = GetTile(t, TileLayer.OBJECT);
+        if (TileInfo[objectTile].Blocking)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public float GetDangerCost(TileCoord t)
+    {
+        var groundTile = GetTile(t, TileLayer.GROUND);
+        if (groundTile == TileType.LAVA)
+        {
+            return 3;
+        }
+        //var objectTile = GetTile(t, TileLayer.OBJECT);
+        //if (TileInfo[objectTile].Blocking)
+        //{
+        //    return true;
+        //}
+
+        return 1;
+    }
+
+    internal List<NavNode> GetNeighbors(TileCoord f)
+    {
+        var result = new List<NavNode>();
+        for (int i = -1; i < 2; i++)
+        {
+            for (int j = -1; j < 2; j++)
+            {
+                if(i == 0 && j == 0)
+                {
+                    continue;
+                }
+                int nX = f.X + i;
+                int nY = f.Y + j;
+                if(nX < -10 || nY < -10 || nX > 20 || nY > 20)
+                {
+                    continue;
+                }
+                var nCoord = new TileCoord(nX, nY);
+                if (IsBlocking(nCoord))
+                {
+                    continue;
+                }
+                float cost = GetDangerCost(nCoord);
+                // Diagonal
+                if (i != 0 && j != 0 )
+                {
+                    cost *= 1.44f;
+                    if (IsBlocking(new TileCoord(nX, f.Y)) || IsBlocking(new TileCoord(f.X, nY)))
+                    {
+                        continue;
+                    }
+                }
+                result.Add(new NavNode(nCoord, cost));
+            }
+        }
+        return result;
     }
 }
