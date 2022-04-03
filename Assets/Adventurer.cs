@@ -16,13 +16,16 @@ public class Adventurer : MonoBehaviour
     [SerializeField] GameObject BurnParticleEffectPrefab;
     new SpriteRenderer renderer;
     protected Navigation navigation;
+    protected Animator animator;
 
     [SerializeField] ProgressBar progressBar;
     protected AdventurerState State;
     Interest CurrentInterest;
 
+
     protected virtual void Start()
     {
+        animator = GetComponent<Animator>();
         renderer = GetComponent<SpriteRenderer>();
         navigation = GetComponent<Navigation>();
         State = AdventurerState.Idle;
@@ -143,6 +146,7 @@ public class Adventurer : MonoBehaviour
     IEnumerator Interacting(Interest interest)
     {
         State = AdventurerState.Interacting;
+        animator.SetBool("Interacting", true);
         int time = 0;
         progressBar.ShowProgressBar();
         while (time < ProgressBar.TIME_TO_LOOT)
@@ -154,6 +158,7 @@ public class Adventurer : MonoBehaviour
         interest.Interact(this);
         OnInterestedInteracted(interest);
         progressBar.HideProgressBar();
+        animator.SetBool("Interacting", false);
         State = AdventurerState.Idle;
         yield return true;
     }

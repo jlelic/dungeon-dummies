@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24cf5de01538144449b57ee45da7f841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.5
+  Speed: 1.2
 --- !u!50 &1051827961398139713
 Rigidbody2D:
   serializedVersion: 4
@@ -183,7 +183,7 @@ MonoBehaviour:
   - {x: -0.27466404, y: 0.015633583, z: 0}
   m_ShapePathHash: -958684427
   m_Mesh: {fileID: 0}
-  m_InstanceId: 55328
+  m_InstanceId: 30012
 --- !u!114 &2550957945751768017
 MonoBehaviour:
   m_ObjectHideFlags: 0
