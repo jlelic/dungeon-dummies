@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
-    public TileCoord EscapeCoord { get; private set; }
+    public Escape Escape { get; private set; }
     int AdventurersRemaining;
     bool SomeoneDied;
     public bool IsPlaying { get; private set; }
@@ -31,9 +31,9 @@ public class LevelManager : MonoBehaviour
         AdventurersRemaining = adventurers.Length;
     }
 
-    public void RegisterEscape(TileCoord coord)
+    public void RegisterEscape(Escape escape)
     {
-        EscapeCoord = coord;
+        Escape = escape;
     }
 
     public void OnAdventurerEscaped()

@@ -1,23 +1,90 @@
+using System.Collections;
 using UnityEngine;
+
+enum AdventurerState
+{
+    Idle,
+    Moving,
+    Interacting,
+    Thinking
+}
 
 public class Adventurer : MonoBehaviour
 {
-    public bool active = false;
+    private bool active = false;
     [SerializeField] GameObject BurnParticleEffectPrefab;
     new SpriteRenderer renderer;
-    Navigation navigation;
+    protected Navigation navigation;
+    [SerializeField] ProgressBar progressBar;
+    AdventurerState State;
+    Interest CurrentInterest;
 
-    private void Start()
+    protected virtual void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         navigation = GetComponent<Navigation>();
+        State = AdventurerState.Idle;
     }
 
     public void Activate()
     {
         active = true;
-        navigation.Navigate(LevelManager.Instance.EscapeCoord);
     }
+
+    protected virtual Interest GetNextInterest()
+    {
+        return LevelManager.Instance.Escape;
+    }
+
+    protected virtual void OnInterestedInteracted(Interest interest)
+    {
+
+    }
+
+    private void Update()
+    {
+        if(!active)
+        {
+            return;
+        }
+
+        switch (State)
+        {
+            case AdventurerState.Idle:
+                CurrentInterest = GetNextInterest();
+                if (CurrentInterest == null)
+                {
+                    StartCoroutine(Thinking(0.5f));
+                }
+                else
+                {
+                    if (CurrentInterest.CanInteractFrom(transform.position))
+                    {
+                        StartCoroutine(Interacting(CurrentInterest));
+                    }
+                    else
+                    {
+                        navigation.Navigate(CurrentInterest);
+                        State = AdventurerState.Moving;
+                    }
+                }
+                break;
+            case AdventurerState.Moving:
+                if (!navigation.IsWalking && !(CurrentInterest is Escape))
+                {
+                    if (CurrentInterest.CanInteractFrom(transform.position))
+                    {
+                        StartCoroutine(Interacting(CurrentInterest));
+                    }
+                    else
+                    {
+                        StartCoroutine(Thinking(0.5f));
+                    }
+                }
+                break;
+        }
+    }
+
 
     public void Burn()
     {
@@ -56,4 +123,29 @@ public class Adventurer : MonoBehaviour
     {
         LevelManager.Instance.OnAdventurerDeath();
     }
+
+    IEnumerator Thinking(float time)
+    {
+        yield return new WaitForSeconds(time);
+        State = AdventurerState.Idle;
+    }
+
+    IEnumerator Interacting(Interest interest)
+    {
+        State = AdventurerState.Interacting;
+        int time = 0;
+        progressBar.ShowProgressBar();
+        while (time < ProgressBar.TIME_TO_LOOT)
+        {
+            time += 5;
+            progressBar.UpdateProgresBar(time);
+            yield return new WaitForSeconds(0.05f);
+        }
+        interest.Interact(this);
+        OnInterestedInteracted(interest);
+        progressBar.HideProgressBar();
+        State = AdventurerState.Idle;
+        yield return true;
+    }
+
 }

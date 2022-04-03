@@ -1,7 +1,5 @@
 using UnityEngine;
 
-public abstract class GreedyInterest : MonoBehaviour
+public abstract class GreedyInterest : Interest
 {
-    public abstract void Loot();
-    public abstract bool IsHazard();
 }

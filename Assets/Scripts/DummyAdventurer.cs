@@ -8,11 +8,11 @@ public class DummyAdventurer : MonoBehaviour
     private List<CuriousInterest> curiousInterests;
     private List<GreedyInterest> greedyInterests;
 
-    private LootTimer lootTimer;
+    private ProgressBar lootTimer;
 
     private void Start()
     {
-        lootTimer = GetComponentInChildren<LootTimer>();
+        lootTimer = GetComponentInChildren<ProgressBar>();
 
         curiousInterests = new List<CuriousInterest>();
         greedyInterests = new List<GreedyInterest>();
@@ -37,14 +37,7 @@ public class DummyAdventurer : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            if (greedyInterests[0].IsHazard())
-            {
-                Debug.Log("You dead good!");
-            }
-            else
-            {
-                StartCoroutine(LootProgress());
-            }
+            StartCoroutine(LootProgress());
         }
     }
 
@@ -52,14 +45,14 @@ public class DummyAdventurer : MonoBehaviour
     {
         int time = 0;
         lootTimer.ShowProgressBar();
-        while (time < LootTimer.TIME_TO_LOOT)
+        while (time < ProgressBar.TIME_TO_LOOT)
         {
             time += 5;
             lootTimer.UpdateProgresBar(time);
             yield return new WaitForSeconds(0.05f);
         }
-        greedyInterests[0].Loot();
-        lootTimer.HideProgrssBar();
+        greedyInterests[0].Interact(null);
+        lootTimer.HideProgressBar();
         yield return true;
     }
 

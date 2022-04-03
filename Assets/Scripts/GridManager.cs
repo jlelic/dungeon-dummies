@@ -12,6 +12,11 @@ public struct TileCoord
         Y = y;
     }
 
+    public float Distance(TileCoord from)
+    {
+        return Mathf.Sqrt((X-from.X)* (X - from.X) + (Y - from.Y) * (Y - from.Y));
+    }
+
     public override string ToString()
     {
         return X + "x" + Y;
@@ -71,6 +76,7 @@ public enum TileType
     BOULDER_HOLE = 16,
     WALL_FIRE_TRAP = 17,
     WALL_FIRE_TRAP_2 = 18,
+    SPIKES_BLOODY = 22,
     GOAL = 31,
 
 }
@@ -88,6 +94,7 @@ public class GridManager : MonoBehaviour
         {TileType.GOAL, new TileInfo{} },
         {TileType.GROUND, new TileInfo{} },
         {TileType.SPIKES, new TileInfo{Cost = 50 } },
+        {TileType.SPIKES_BLOODY, new TileInfo{Cost = 50 } },
         {TileType.LAVA, new TileInfo{Burning = true, Cost = 50 } },
         {TileType.LEVER, new TileInfo{Blocking = true} },
         {TileType.PILLAR, new TileInfo{Blocking = true} },

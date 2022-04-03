@@ -16,11 +16,12 @@ public abstract class LootObject : GreedyInterest
         GetComponent<SpriteRenderer>().sprite = nonLootedState;
     }
 
-    public override void Loot()
+    public override void Interact(Adventurer adventurer)
     {
         GetComponent<SpriteRenderer>().sprite = lootedState;
         GetComponent<AudioSource>().Play();
         OnLoot();
+        IsActive = false;
     }
 
     public abstract void OnLoot();

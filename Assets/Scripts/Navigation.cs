@@ -17,9 +17,10 @@ public class Navigation : MonoBehaviour
 {
     static List<Navigation> ActiveNavigations = new List<Navigation>();
 
-    Queue<TileCoord> navQueue;
+    Queue<NavNode> navQueue;
     Vector3 nextNavPosition;
-    bool moving = false;
+    float lastTolerance;
+    public bool IsWalking { get; private set; }
 
     [SerializeField] float Speed = 2;
 
@@ -31,43 +32,87 @@ public class Navigation : MonoBehaviour
         ActiveNavigations.Add(this);
     }
 
-    public void Navigate(TileCoord target)
+    public void Navigate(Interest interest)
+    {
+        Navigate(interest.Coord, interest.InteractableDistance);
+    }
+
+    public void Navigate(TileCoord target, float tolerance = 0)
     {
         var start = GridManager.Instance.GetTileCoordFromWorld(transform.position);
-        var path = CalculatePath(start, target);
+        var path = CalculatePath(start, target, tolerance);
+        lastTolerance = tolerance;
         if(path == null)
         {
             Debug.LogWarning(gameObject.name + " can't navigate to " + target.ToString());
-            moving = false;
+            IsWalking = false;
             animator.SetBool("Walking", false);
             return;
         } else
         {
-            moving = true;
+            IsWalking = true;
             nextNavPosition = transform.position;
-            navQueue = new Queue<TileCoord>(path);
+            navQueue = new Queue<NavNode>(path);
         }
+    }
+
+    public Interest GetClosestInterest(IEnumerable<Interest> interests)
+    {
+        Interest closest = null;
+        float shortest = 9999999999f;
+        foreach(var i in interests)
+        {
+            var distance = DistanceTo(i);
+            if(distance >=0 && distance < shortest)
+            {
+                shortest = distance;
+                closest = i;
+            }
+        }
+        return closest;
+    }
+
+    public float DistanceTo(Interest interest)
+    {
+        return DistanceTo(interest.Coord, interest.InteractableDistance);
+    }
+
+    public float DistanceTo(TileCoord target, float tolerance = 1)
+    {
+        var start = GridManager.Instance.GetTileCoordFromWorld(transform.position);
+        var path = CalculatePath(start, target, tolerance);
+        if(path == null)
+        {
+            return -1;
+        }
+        float distance = 0;
+        foreach(var n in path)
+        {
+            distance += n.cost;
+        }
+
+        return distance;
     }
 
     public void Stop()
     {
-        moving = false;
+        IsWalking = false;
     }
 
     private void Update()
     {
-        if(moving)
+        if(IsWalking)
         {
             if(Vector3.Distance(transform.position,nextNavPosition)< 0.1f)
             {
                 transform.position = nextNavPosition;
-                moving = navQueue.Count > 0;
-                if(moving)
+                IsWalking = navQueue.Count > 0;
+                if(IsWalking)
                 {
-                    nextNavPosition = GridManager.Instance.GetWorldPosFromTile(navQueue.Dequeue());
+                    nextNavPosition = GridManager.Instance.GetWorldPosFromTile(navQueue.Dequeue().coord);
 
                 }
-                animator.SetBool("Walking", moving);
+                animator.SetBool("Walking", IsWalking);
             } else
             {
                 transform.position += (nextNavPosition - transform.position).normalized * Speed * Time.deltaTime;
@@ -77,10 +122,10 @@ public class Navigation : MonoBehaviour
 
     private void Recalculate()
     {
-        if(moving)
+        if(IsWalking)
         {
-            moving = false;
-            Navigate(navQueue.ToArray()[navQueue.Count - 1]);
+            IsWalking = false;
+            Navigate(navQueue.ToArray()[navQueue.Count - 1].coord, lastTolerance);
         }
     }
 
@@ -92,12 +137,12 @@ public class Navigation : MonoBehaviour
         }
     }
 
-    List<TileCoord> CalculatePath(TileCoord start, TileCoord goal)
+    List<NavNode> CalculatePath(TileCoord start, TileCoord goal, float tolerance = 0)
     {
         var openSet = new List<TileCoord>();
         openSet.Add(start);
 
-        var cameFrom = new Dictionary<TileCoord, TileCoord>();
+        var cameFrom = new Dictionary<TileCoord, NavNode>();
 
         var gScore = new Dictionary<TileCoord, float>();
         gScore[start] = 0;
@@ -111,7 +156,7 @@ public class Navigation : MonoBehaviour
         {
             openSet.Sort((a, b) => { var diff = fScore[a] - fScore[b]; if (diff > 0) return 1; if (diff < 0) return -1; return 0; });
             var current = openSet[0];
-            if (current.Equals(goal))
+            if ((tolerance == 0 && current.Equals(goal)) ||  current.Distance(goal) <= tolerance)
             {
                 return ReconstructPath(cameFrom, current);
             }
@@ -131,7 +176,7 @@ public class Navigation : MonoBehaviour
                 var tentativeGScore = gScore[current] + navNode.cost; // WEIGHT
                 if (tentativeGScore < gScore[neighbor])
                 {
-                    cameFrom[neighbor] = current;
+                    cameFrom[neighbor] = new NavNode {coord = current, cost = navNode.cost};
                     gScore[neighbor] = tentativeGScore;
                     fScore[neighbor] = tentativeGScore + heuristicLine(neighbor, goal);
                     if (!openSet.Contains(neighbor))
@@ -151,14 +196,15 @@ public class Navigation : MonoBehaviour
         return Mathf.Sqrt(dX * dX + dY * dY);
     }
 
-    private List<TileCoord> ReconstructPath(Dictionary<TileCoord, TileCoord> cameFrom, TileCoord current)
+    private List<NavNode> ReconstructPath(Dictionary<TileCoord, NavNode> cameFrom, TileCoord current)
     {
-        var result = new List<TileCoord>();
-        result.Add(current);
+        var result = new List<NavNode>();
+        result.Add(new NavNode {coord = current, cost = 0 });
         while(cameFrom.ContainsKey(current))
         {
-            current = cameFrom[current];
-            result.Add(current);
+            var nextNode = cameFrom[current];
+            current = nextNode.coord;
+            result.Add(nextNode);
         }
         result.Reverse();
         return result;
