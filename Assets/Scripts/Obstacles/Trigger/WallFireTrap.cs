@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-[RequireComponent(typeof(AudioSource)), RequireComponent(typeof(SpriteRenderer)), RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Animator)), RequireComponent(typeof(Collider2D))]
 public class WallFireTrap : Triggerable
 {
 
@@ -28,5 +28,6 @@ public class WallFireTrap : Triggerable
         GetComponent<AudioSource>().Play();
         GetComponent<SpriteRenderer>().sprite = disabledState;
         trapEnabled = false;
+        GetComponent<Animator>().SetBool("doused", true);
     }
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource)), RequireComponent(typeof(SpriteRenderer))]
 public class WallArrowTrap : Triggerable
 {
 
