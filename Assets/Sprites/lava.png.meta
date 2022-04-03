@@ -1,34 +1,19 @@
 fileFormatVersion: 2
-guid: 2c8c85a4837ec9246844f1dc8203baf3
+guid: 84ca1a3e1bfb562449a0d2c5569b5df2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8769201681552721920
-    second: brusher_0
+      213: 6673312695985084743
+    second: lava_0
   - first:
-      213: 8474969838186401537
-    second: brusher_1
+      213: -7963212025696194793
+    second: lava_1
   - first:
-      213: -337694024985101654
-    second: brusher_2
+      213: -2205451468145830947
+    second: lava_2
   - first:
-      213: 3928961185947400321
-    second: brusher_3
-  - first:
-      213: 3524876649051135810
-    second: brusher_4
-  - first:
-      213: -8267680357984658633
-    second: brusher_5
-  - first:
-      213: 3738950403153601591
-    second: brusher_6
-  - first:
-      213: 719939214147497396
-    second: brusher_7
-  - first:
-      213: -623124582148597930
-    second: brusher_8
+      213: 3422446650199752384
+    second: lava_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -62,9 +47,9 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -126,23 +111,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: brusher_0
+      name: lava_0
       rect:
         serializedVersion: 2
         x: 0
@@ -156,14 +129,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00845b8d77672b970800000000000000
-      internalID: 8769201681552721920
+      spriteID: 7499b4f4a8e5c9c50800000000000000
+      internalID: 6673312695985084743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: brusher_1
+      name: lava_1
       rect:
         serializedVersion: 2
         x: 16
@@ -177,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10f004f5a242d9570800000000000000
-      internalID: 8474969838186401537
+      spriteID: 71f62418adcfc7190800000000000000
+      internalID: -7963212025696194793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: brusher_2
+      name: lava_2
       rect:
         serializedVersion: 2
         x: 32
@@ -198,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aaabdfdc215405bf0800000000000000
-      internalID: -337694024985101654
+      spriteID: dd3ddcf1399a461e0800000000000000
+      internalID: -2205451468145830947
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: brusher_3
+      name: lava_3
       rect:
         serializedVersion: 2
         x: 48
@@ -219,113 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18831b0d169768630800000000000000
-      internalID: 3928961185947400321
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: brusher_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 24f13cff2a0eae030800000000000000
-      internalID: 3524876649051135810
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: brusher_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 73b99d9b48c434d80800000000000000
-      internalID: -8267680357984658633
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: brusher_6
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 73426c4f49b63e330800000000000000
-      internalID: 3738950403153601591
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: brusher_7
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4bda22f96ecbdf900800000000000000
-      internalID: 719939214147497396
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: brusher_8
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65718367e773a57f0800000000000000
-      internalID: -623124582148597930
+      spriteID: 0ceb1ef6819fe7f20800000000000000
+      internalID: 3422446650199752384
       vertices: []
       indices: 
       edges: []

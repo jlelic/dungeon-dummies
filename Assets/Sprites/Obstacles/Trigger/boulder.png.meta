@@ -1,31 +1,16 @@
 fileFormatVersion: 2
-guid: acdb307d9e2508c48b9528f2434f195e
+guid: b8d0dcbc7c4d6d84f80d23e7c4742730
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3503449166650229005
-    second: greedy_0
+      213: 3682734787062045483
+    second: boulder_0
   - first:
-      213: -7428212381455027449
-    second: greedy_1
+      213: -2628348883552464528
+    second: boulder_1
   - first:
-      213: 8275640500077895472
-    second: greedy_2
-  - first:
-      213: 1657001423355810107
-    second: greedy_3
-  - first:
-      213: -9220419597149860995
-    second: greedy_4
-  - first:
-      213: -8404110534052766201
-    second: greedy_5
-  - first:
-      213: 8898651494824272326
-    second: greedy_6
-  - first:
-      213: 8382693684262880714
-    second: greedy_7
+      213: -3063294496382507922
+    second: boulder_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -59,9 +44,9 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -123,23 +108,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: greedy_0
+      name: boulder_0
       rect:
         serializedVersion: 2
         x: 0
@@ -153,14 +126,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3febc258b8f316fc0800000000000000
-      internalID: -3503449166650229005
+      spriteID: b2b9ec0e6c3bb1330800000000000000
+      internalID: 3682734787062045483
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: greedy_1
+      name: boulder_1
       rect:
         serializedVersion: 2
         x: 16
@@ -174,14 +147,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 703f6370230b9e890800000000000000
-      internalID: -7428212381455027449
+      spriteID: 0719f02bd9a368bd0800000000000000
+      internalID: -2628348883552464528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: greedy_2
+      name: boulder_2
       rect:
         serializedVersion: 2
         x: 32
@@ -195,113 +168,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03f9af7403bf8d270800000000000000
-      internalID: 8275640500077895472
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: greedy_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b31907fe30adef610800000000000000
-      internalID: 1657001423355810107
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: greedy_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d7b05df6a3d7a0080800000000000000
-      internalID: -9220419597149860995
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: greedy_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 70e9aa40ff99e5b80800000000000000
-      internalID: -8404110534052766201
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: greedy_6
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c1eff0336c5e7b70800000000000000
-      internalID: 8898651494824272326
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: greedy_7
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ac5466f0e7f455470800000000000000
-      internalID: 8382693684262880714
+      spriteID: e6426b4b2edfc75d0800000000000000
+      internalID: -3063294496382507922
       vertices: []
       indices: 
       edges: []
