@@ -22,7 +22,7 @@ public class Adventurer : MonoBehaviour
         Instantiate(BurnParticleEffectPrefab, transform.position, Quaternion.identity, transform);
         iTween.ValueTo(gameObject, iTween.Hash(
             //"delay", 0.3f,
-            "time", 0.8f,
+            "time", 1.5f,
             "from", 0f,
             "to", 1f,
             "onupdate", (System.Action<float>)((value) => { renderer.material.SetFloat("_Step", value); }),
