@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volume: 1
   startClip: {fileID: 8300000, guid: 277a6041cdc1e574ca1e8fbbac41611d, type: 3}
-  lowClip: {fileID: 8300000, guid: 1acb0d1bfff42cb49a63163e948b5b49, type: 3}
-  highClip: {fileID: 8300000, guid: dc2a8d720dc022a41966dcdf79a1677a, type: 3}
+  lowClip: {fileID: 8300000, guid: ee1153c45a67b744fa9dc78afe262cad, type: 3}
+  highClip: {fileID: 8300000, guid: 3a3c269beec948f4098d419143f47b88, type: 3}
   endClip: {fileID: 8300000, guid: a8c5ef2efe9ceb848bea0d1b45a60e98, type: 3}
   segmentLength: 2.4
 --- !u!82 &6203131056082596492
