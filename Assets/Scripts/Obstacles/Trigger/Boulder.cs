@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator)), RequireComponent(typeof(AudioSource)), RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator)), RequireComponent(typeof(AudioSource)), RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(Collider2D)), RequireComponent(typeof(SpriteRenderer))]
 public class Boulder : MonoBehaviour
 {
     [SerializeField] AudioClip impactSFX;
@@ -28,6 +28,15 @@ public class Boulder : MonoBehaviour
             {
                 StopBoulder();
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Adventurer")
+        {
+            Adventurer adventurer = other.gameObject.GetComponent<Adventurer>();
+            adventurer.Smash();
         }
     }
 

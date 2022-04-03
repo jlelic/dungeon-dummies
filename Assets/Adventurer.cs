@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Adventurer : MonoBehaviour
@@ -37,7 +35,24 @@ public class Adventurer : MonoBehaviour
             ));
     }
 
-    void OnDeath ()
+    public void Smash()
+    {
+        active = false;
+        navigation.Stop();
+        // TODO - change animation to smash effect
+        Utils.tweenColor(renderer, Color.black, 0.2f);
+        Instantiate(BurnParticleEffectPrefab, transform.position, Quaternion.identity, transform);
+        iTween.ValueTo(gameObject, iTween.Hash(
+            //"delay", 0.3f,
+            "time", 1.5f,
+            "from", 0f,
+            "to", 1f,
+            "onupdate", (System.Action<float>)((value) => { renderer.material.SetFloat("_Step", value); }),
+            "oncomplete", (System.Action)(() => { OnDeath(); Destroy(gameObject); })
+            ));
+    }
+
+    void OnDeath()
     {
         LevelManager.Instance.OnAdventurerDeath();
     }
