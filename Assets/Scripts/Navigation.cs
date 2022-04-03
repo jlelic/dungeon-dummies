@@ -28,14 +28,11 @@ public class Navigation : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        Navigate(new TileCoord(12, 1));
         ActiveNavigations.Add(this);
     }
 
-    void Navigate(TileCoord target)
+    public void Navigate(TileCoord target)
     {
-        Debug.Log(GridManager.Instance.GetTile(new TileCoord(6, 8), TileLayer.OBJECT));
-        Debug.Log(GridManager.Instance.GetTile(new TileCoord(4, 4), TileLayer.OBJECT));
         var start = GridManager.Instance.GetTileCoordFromWorld(transform.position);
         var path = CalculatePath(start, target);
         if(path == null)

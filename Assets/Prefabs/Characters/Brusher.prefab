@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4600122193999763983}
   m_Layer: 0
   m_Name: Brusher
-  m_TagString: Untagged
+  m_TagString: Adventurer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24cf5de01538144449b57ee45da7f841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1.5
+  Speed: 1.8
 --- !u!50 &478619196
 Rigidbody2D:
   serializedVersion: 4
@@ -182,7 +182,7 @@ MonoBehaviour:
   - {x: -0.27466404, y: 0.015633583, z: 0}
   m_ShapePathHash: -958684427
   m_Mesh: {fileID: 0}
-  m_InstanceId: -130994
+  m_InstanceId: 113856
 --- !u!114 &4600122193999763983
 MonoBehaviour:
   m_ObjectHideFlags: 0

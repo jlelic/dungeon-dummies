@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6609815130138171878}
   m_Layer: 0
   m_Name: Curious
-  m_TagString: Untagged
+  m_TagString: Adventurer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   - {x: -0.27466404, y: 0.015633583, z: 0}
   m_ShapePathHash: -958684427
   m_Mesh: {fileID: 0}
-  m_InstanceId: -130994
+  m_InstanceId: 113550
 --- !u!114 &6609815130138171878
 MonoBehaviour:
   m_ObjectHideFlags: 0

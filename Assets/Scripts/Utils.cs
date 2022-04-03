@@ -26,7 +26,7 @@ public class Utils
          })
         ));
     }
-    public static void tweenColor(SpriteRenderer renderer, Color color, float time, float delay = 0, EaseType easeType = EaseType.linear, bool ignoreTimeScale = false)
+    public static void tweenColor(SpriteRenderer renderer, Color color, float time, float delay = 0, EaseType easeType = EaseType.linear, bool ignoreTimeScale = false, System.Action callback = null)
     {
         ValueTo(renderer.gameObject, Hash(
          "from", renderer.color,
@@ -38,6 +38,12 @@ public class Utils
          "onupdate", (System.Action<Color>)(newColor =>
          {
              renderer.color = newColor;
+         }),
+         "oncomplete", (System.Action)(() => {
+             if(callback != null)
+             {
+                 callback();
+             }
          })
         ));
     }

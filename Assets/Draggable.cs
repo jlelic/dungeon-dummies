@@ -43,7 +43,11 @@ public class Draggable : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("DRAG");
+        if (LevelManager.Instance.IsPlaying)
+        {
+            return;
+        }
+
         currentOffset = Vector3.zero;
         dragging = true;
         if (hasAttachedTile)

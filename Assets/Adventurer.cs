@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class Adventurer : MonoBehaviour
 {
-    public bool active = true;
+    public bool active = false;
     [SerializeField] GameObject BurnParticleEffectPrefab;
     new SpriteRenderer renderer;
     Navigation navigation;
+
     private void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         navigation = GetComponent<Navigation>();
+    }
+
+    public void Activate()
+    {
+        active = true;
+        navigation.Navigate(new TileCoord(12, 1));
     }
 
     public void Burn()

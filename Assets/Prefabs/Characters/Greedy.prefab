@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3552844458444564338}
   m_Layer: 0
   m_Name: Greedy
-  m_TagString: Untagged
+  m_TagString: Adventurer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   - {x: -0.27466404, y: 0.015633583, z: 0}
   m_ShapePathHash: -958684427
   m_Mesh: {fileID: 0}
-  m_InstanceId: -130994
+  m_InstanceId: 113712
 --- !u!114 &3552844458444564338
 MonoBehaviour:
   m_ObjectHideFlags: 0
