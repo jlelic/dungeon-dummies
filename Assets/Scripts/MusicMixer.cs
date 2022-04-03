@@ -41,7 +41,6 @@ public class MusicMixer : MonoBehaviour
         this.audioSource.volume = this.volume;
 
         if (this.switchTime >= 0f && this.audioSource.time >= this.switchTime) {
-            Debug.Log("switch audio");
             this.switchTime = -1f;
             this.audioSource.Stop();
             switch(this.switchName) {
