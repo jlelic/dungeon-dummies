@@ -35,7 +35,9 @@ public class UIManager : MonoBehaviour
     {
         GridHighlight.gameObject.SetActive(true);
         var coord = Grid.GetTileCoordFromWorld(position);
-        bool validPlacement = !Grid.IsBlocking(coord);
+        var objectTile = Grid.GetTile(coord, TileLayer.OBJECT);
+        bool validPlacement = !Grid.IsBlocking(coord) && objectTile.Equals(TileType.EMPTY);
+
         if (validPlacement)
         {
             GridHighlight.sprite = OkGridHighlightSprite;

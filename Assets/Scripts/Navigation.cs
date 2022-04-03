@@ -15,6 +15,8 @@ struct NavNode {
 
 public class Navigation : MonoBehaviour
 {
+    static List<Navigation> ActiveNavigations = new List<Navigation>();
+
     Queue<TileCoord> navQueue;
     Vector3 nextNavPosition;
     bool moving = false;
@@ -27,16 +29,20 @@ public class Navigation : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         Navigate(new TileCoord(12, 1));
+        ActiveNavigations.Add(this);
     }
 
     void Navigate(TileCoord target)
     {
+        Debug.Log(GridManager.Instance.GetTile(new TileCoord(6, 8), TileLayer.OBJECT));
+        Debug.Log(GridManager.Instance.GetTile(new TileCoord(4, 4), TileLayer.OBJECT));
         var start = GridManager.Instance.GetTileCoordFromWorld(transform.position);
         var path = CalculatePath(start, target);
         if(path == null)
         {
             Debug.LogWarning(gameObject.name + " can't navigate to " + target.ToString());
             moving = false;
+            animator.SetBool("Walking", false);
             return;
         } else
         {
@@ -69,6 +75,23 @@ public class Navigation : MonoBehaviour
             {
                 transform.position += (nextNavPosition - transform.position).normalized * Speed * Time.deltaTime;
             }
+        }
+    }
+
+    private void Recalculate()
+    {
+        if(moving)
+        {
+            moving = false;
+            Navigate(navQueue.ToArray()[navQueue.Count - 1]);
+        }
+    }
+
+    public static void RecalculateAll()
+    {
+        foreach(var nav in ActiveNavigations)
+        {
+            nav.Recalculate();
         }
     }
 

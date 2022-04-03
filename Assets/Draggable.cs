@@ -80,7 +80,7 @@ public class Draggable : MonoBehaviour
         iTween.MoveTo(gameObject, iTween.Hash(
             "position", Shadow.GetShadowPosition(),
             "time", 0.2f,
-            "onfinished",(Action)(() => { GridManager.Instance.SetTile(TileCoord, TileLayer, TileType); })
+            "oncomplete",(Action)(() => { GridManager.Instance.SetTile(TileCoord, TileLayer, TileType); Navigation.RecalculateAll(); })
         ));
     }
 

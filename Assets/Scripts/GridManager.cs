@@ -82,6 +82,8 @@ public class GridManager : MonoBehaviour
         {TileType.BRIDGE, new TileInfo{} },
         {TileType.WALL, new TileInfo{Blocking = true} },
         {TileType.LEVER, new TileInfo{Blocking = true} },
+        {TileType.STATUE, new TileInfo{Blocking = true} },
+        {TileType.PILLAR, new TileInfo{Blocking = true} },
     };
 
 
@@ -261,7 +263,7 @@ public class GridManager : MonoBehaviour
     public float GetDangerCost(TileCoord t)
     {
         var groundTile = GetTile(t, TileLayer.GROUND);
-        if (groundTile == TileType.LAVA)
+        if (groundTile == TileType.LAVA || groundTile == TileType.SPIKES)
         {
             return 3;
         }
