@@ -117,10 +117,10 @@ public class UIManager : MonoBehaviour
 
     void OnRestartClicked()
     {
-        SetOverlay();
+        RestartLevel();
     }
 
-    void SetOverlay()
+    public void RestartLevel()
     {
         var lights = FindObjectsOfType<Light2D>();
         foreach(var light in lights)
@@ -146,5 +146,10 @@ public class UIManager : MonoBehaviour
         Overlay.gameObject.SetActive(true);
         Overlay.color = Color.black;
         Utils.tweenColor(Overlay, Color.clear, 1.5f, ignoreTimeScale: true);
+    }
+
+    public void ShowGoodJobScreen()
+    {
+        Debug.Log("Good Job");
     }
 }

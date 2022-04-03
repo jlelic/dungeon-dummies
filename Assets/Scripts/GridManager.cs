@@ -67,6 +67,7 @@ public enum TileType
     STATUE = 11,
     PRESSURE_PLATE = 12,
     LEVER = 13,
+    GOAL = 31,
 
 }
 
@@ -77,14 +78,16 @@ public class GridManager : MonoBehaviour
 
     static public Dictionary<TileType, TileInfo> TileInfo = new Dictionary<TileType, TileInfo>()
     {
-        {TileType.EMPTY, new TileInfo{} },
-        {TileType.LAVA, new TileInfo{Burning = true } },
-        {TileType.GROUND, new TileInfo{} },
         {TileType.BRIDGE, new TileInfo{Platform = true} },
-        {TileType.WALL, new TileInfo{Blocking = true} },
+        {TileType.EMPTY, new TileInfo{} },
+        {TileType.GOAL, new TileInfo{} },
+        {TileType.GROUND, new TileInfo{} },
+        {TileType.LAVA, new TileInfo{Burning = true } },
         {TileType.LEVER, new TileInfo{Blocking = true} },
-        {TileType.STATUE, new TileInfo{Blocking = true} },
         {TileType.PILLAR, new TileInfo{Blocking = true} },
+        {TileType.STATUE, new TileInfo{Blocking = true} },
+        {TileType.URN, new TileInfo{} },
+        {TileType.WALL, new TileInfo{Blocking = true} },
     };
 
 
@@ -201,6 +204,10 @@ public class GridManager : MonoBehaviour
             return TileType.EMPTY;
         }
         var id = tile.m_TileId;
+        if(!TileInfo.ContainsKey((TileType)id))
+        {
+            Debug.LogWarning("No tile info about tile ID " + id);
+        }
         return (TileType)id;
     }
 

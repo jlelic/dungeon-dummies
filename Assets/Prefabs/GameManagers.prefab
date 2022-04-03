@@ -1056,6 +1056,8 @@ MonoBehaviour:
     prefab: {fileID: 8177912840898314232, guid: d9e1618c91209604a96ceea4f44f81a0, type: 3}
   - tileType: 4
     prefab: {fileID: 1239876400139341756, guid: 5f7da73f5298c0546ab52315a46b7809, type: 3}
+  - tileType: 31
+    prefab: {fileID: 8177912840898314232, guid: 1dc5a01f73cba3a4e8fafc48cba034ba, type: 3}
 --- !u!114 &372876847604135948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1177,7 +1179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1051827961398139718, guid: 49585632f05ee02439b804c4d342ff22, type: 3}
       propertyPath: m_InstanceId
-      value: -1298
+      value: -24202
       objectReference: {fileID: 0}
     - target: {fileID: 1123353071743322252, guid: 49585632f05ee02439b804c4d342ff22, type: 3}
       propertyPath: Speed
@@ -1255,7 +1257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 478619195, guid: 2b72a45c22b13cb4aa541daf14386eb0, type: 3}
       propertyPath: m_InstanceId
-      value: -1316
+      value: -24220
       objectReference: {fileID: 0}
     - target: {fileID: 76038237942478318, guid: 2b72a45c22b13cb4aa541daf14386eb0, type: 3}
       propertyPath: m_Name
@@ -1329,7 +1331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7236208266858685906, guid: 1e2022e4ac6df5c45a26169f380242e3, type: 3}
       propertyPath: m_InstanceId
-      value: -1334
+      value: -24238
       objectReference: {fileID: 0}
     - target: {fileID: 7305411765954950663, guid: 1e2022e4ac6df5c45a26169f380242e3, type: 3}
       propertyPath: m_Name

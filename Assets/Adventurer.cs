@@ -18,7 +18,7 @@ public class Adventurer : MonoBehaviour
     public void Activate()
     {
         active = true;
-        navigation.Navigate(new TileCoord(12, 1));
+        navigation.Navigate(LevelManager.Instance.EscapeCoord);
     }
 
     public void Burn()
@@ -33,7 +33,12 @@ public class Adventurer : MonoBehaviour
             "from", 0f,
             "to", 1f,
             "onupdate", (System.Action<float>)((value) => { renderer.material.SetFloat("_Step", value); }),
-            "oncomplete", (System.Action)(() => { Destroy(gameObject); })
+            "oncomplete", (System.Action)(() => { OnDeath(); Destroy(gameObject); })
             ));
+    }
+
+    void OnDeath ()
+    {
+        LevelManager.Instance.OnAdventurerDeath();
     }
 }
