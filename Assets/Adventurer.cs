@@ -126,6 +126,11 @@ public class Adventurer : MonoBehaviour
 
     public virtual void PierceByArrow()
     {
+        Kill();
+    }
+
+    public virtual void Kill()
+    {
         active = false;
         navigation.Stop();
         OnDeath();
