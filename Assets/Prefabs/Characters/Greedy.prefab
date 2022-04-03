@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1051827961398139719}
   - component: {fileID: 1051827961398139718}
   - component: {fileID: 2550957945751768017}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Greedy
   m_TagString: Adventurer
   m_Icon: {fileID: 0}

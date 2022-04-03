@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-enum AdventurerState
+public enum AdventurerState
 {
     Idle,
     Moving,
     Interacting,
+    Attacking,
     Thinking
 }
 
@@ -18,7 +19,7 @@ public class Adventurer : MonoBehaviour
     protected Animator animator;
 
     [SerializeField] ProgressBar progressBar;
-    AdventurerState State;
+    protected AdventurerState State;
     Interest CurrentInterest;
 
 
@@ -47,7 +48,7 @@ public class Adventurer : MonoBehaviour
 
     private void Update()
     {
-        if(!active)
+        if (!active)
         {
             return;
         }
@@ -121,6 +122,14 @@ public class Adventurer : MonoBehaviour
             "onupdate", (System.Action<float>)((value) => { renderer.material.SetFloat("_Step", value); }),
             "oncomplete", (System.Action)(() => { OnDeath(); Destroy(gameObject); })
             ));
+    }
+
+    public virtual void PierceByArrow()
+    {
+        active = false;
+        navigation.Stop();
+        OnDeath();
+        Destroy(gameObject);
     }
 
     void OnDeath()
