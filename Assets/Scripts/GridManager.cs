@@ -41,6 +41,7 @@ public struct TileInfo
     public bool Blocking;
     public bool Burning;
     public bool Hazard;
+    public bool Platform;
 }
 
 
@@ -79,7 +80,7 @@ public class GridManager : MonoBehaviour
         {TileType.EMPTY, new TileInfo{} },
         {TileType.LAVA, new TileInfo{Burning = true } },
         {TileType.GROUND, new TileInfo{} },
-        {TileType.BRIDGE, new TileInfo{} },
+        {TileType.BRIDGE, new TileInfo{Platform = true} },
         {TileType.WALL, new TileInfo{Blocking = true} },
         {TileType.LEVER, new TileInfo{Blocking = true} },
         {TileType.STATUE, new TileInfo{Blocking = true} },
@@ -263,9 +264,10 @@ public class GridManager : MonoBehaviour
     public float GetDangerCost(TileCoord t)
     {
         var groundTile = GetTile(t, TileLayer.GROUND);
-        if (groundTile == TileType.LAVA || groundTile == TileType.SPIKES)
+        var isPlatform = TileInfo[GetTile(t, TileLayer.OBJECT)].Platform;
+        if ((groundTile == TileType.LAVA || groundTile == TileType.SPIKES) && !isPlatform)
         {
-            return 3;
+            return 50;
         }
         //var objectTile = GetTile(t, TileLayer.OBJECT);
         //if (TileInfo[objectTile].Blocking)

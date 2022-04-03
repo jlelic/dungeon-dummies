@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UnlitWithEmission
+  m_Name: SpriteWithEmission
   m_Shader: {fileID: -6465566751694194690, guid: 8b6e1b18d4f3b674095e63b660631a93, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -55,6 +55,7 @@ Material:
     - _EnableExternalAlpha: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 4.9245777, g: 0.116145685, b: 4.028889, a: 0}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
