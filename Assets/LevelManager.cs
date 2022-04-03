@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
                 UIManager.Instance.ShowGoodJobScreen();
             }
         }
+        MusicMixer.instance.QueueEnd();
     }
 
     public void OnAdventurerDeath()
@@ -59,6 +60,7 @@ public class LevelManager : MonoBehaviour
         {
             UIManager.Instance.RestartLevel();
         }
+        MusicMixer.instance.QueueEnd();
     }
 
     public void StartLevel()
@@ -69,11 +71,14 @@ public class LevelManager : MonoBehaviour
         {
             a.Activate();
         }
+        MusicMixer.instance.QueueHigh();
     }
 
     public void RestartLevel()
     {
         var scene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
+
+        MusicMixer.instance.StartMusic();
     }
 }
