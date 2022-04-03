@@ -7,6 +7,8 @@ TagManager:
   - Hazard
   - Adventurer
   - Platform
+  - Undefined
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Adventurer
   - 
   - 
   - 
