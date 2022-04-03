@@ -9,6 +9,7 @@ public class Escape : Interest
     // Start is called before the first frame update
     void Start()
     {
+        InteractableDistance = 0;
         Grid = GridManager.Instance;
         coord = Grid.GetTileCoordFromWorld(transform.position);
         GridManager.Instance.ClearTile(coord, TileLayer.OBJECT);
