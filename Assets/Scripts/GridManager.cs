@@ -42,6 +42,7 @@ public struct TileInfo
     public bool Burning;
     public bool Hazard;
     public bool Platform;
+    public float Cost;
 }
 
 
@@ -67,6 +68,9 @@ public enum TileType
     STATUE = 11,
     PRESSURE_PLATE = 12,
     LEVER = 13,
+    BOULDER_HOLE = 16,
+    WALL_FIRE_TRAP = 17,
+    WALL_FIRE_TRAP_2 = 18,
     GOAL = 31,
 
 }
@@ -78,16 +82,20 @@ public class GridManager : MonoBehaviour
 
     static public Dictionary<TileType, TileInfo> TileInfo = new Dictionary<TileType, TileInfo>()
     {
+        {TileType.BOULDER_HOLE, new TileInfo{Blocking = true} },
         {TileType.BRIDGE, new TileInfo{Platform = true} },
         {TileType.EMPTY, new TileInfo{} },
         {TileType.GOAL, new TileInfo{} },
         {TileType.GROUND, new TileInfo{} },
-        {TileType.LAVA, new TileInfo{Burning = true } },
+        {TileType.SPIKES, new TileInfo{Cost = 50 } },
+        {TileType.LAVA, new TileInfo{Burning = true, Cost = 50 } },
         {TileType.LEVER, new TileInfo{Blocking = true} },
         {TileType.PILLAR, new TileInfo{Blocking = true} },
         {TileType.STATUE, new TileInfo{Blocking = true} },
         {TileType.URN, new TileInfo{} },
         {TileType.WALL, new TileInfo{Blocking = true} },
+        {TileType.WALL_FIRE_TRAP, new TileInfo{Blocking = true} },
+        {TileType.WALL_FIRE_TRAP_2, new TileInfo{Blocking = true} },
     };
 
 
