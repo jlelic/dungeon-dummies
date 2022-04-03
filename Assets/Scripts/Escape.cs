@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Escape : MonoBehaviour
+public class Escape : Interest
 {
     TileCoord coord;
     GridManager Grid;
@@ -12,7 +12,7 @@ public class Escape : MonoBehaviour
         Grid = GridManager.Instance;
         coord = Grid.GetTileCoordFromWorld(transform.position);
         GridManager.Instance.ClearTile(coord, TileLayer.OBJECT);
-        LevelManager.Instance.RegisterEscape(coord);
+        LevelManager.Instance.RegisterEscape(this);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,5 +23,9 @@ public class Escape : MonoBehaviour
             var navigation = collision.GetComponent<Navigation>();
             iTween.MoveTo(collision.gameObject, Grid.GetWorldPosFromTile(new TileCoord(coord.X + 2, coord.Y)), 5);
         }
+    }
+
+    public override void Interact(Adventurer adventurer)
+    {
     }
 }

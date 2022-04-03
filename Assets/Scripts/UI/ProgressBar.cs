@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Canvas)), RequireComponent(typeof(Slider))]
-public class LootTimer : MonoBehaviour
+public class ProgressBar : MonoBehaviour
 {
     public static int TIME_TO_LOOT = 100;
 
@@ -35,7 +35,7 @@ public class LootTimer : MonoBehaviour
         }
     }
 
-    public void HideProgrssBar()
+    public void HideProgressBar()
     {
         if (canvas.enabled)
         {

@@ -27,11 +27,6 @@ public class Urn : LootObject
         }
     }
 
-    public override bool IsHazard()
-    {
-        return !hazardCleared;
-    }
-
     public override void OnLoot()
     {
         if (objectToTrigger)
