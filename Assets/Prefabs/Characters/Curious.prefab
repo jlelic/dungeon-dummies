@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7236208266858685907}
   - component: {fileID: 7236208266858685906}
   - component: {fileID: 6609815130138171878}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Curious
   m_TagString: Adventurer
   m_Icon: {fileID: 0}
@@ -195,5 +195,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc3ebd9c1c03294b9aaebabcbfd4ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 1
   BurnParticleEffectPrefab: {fileID: 1915563807190241461, guid: e8fa68c3c298a6044bc38ec7454b3074, type: 3}
+  progressBar: {fileID: 0}

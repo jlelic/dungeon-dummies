@@ -16,4 +16,9 @@ public abstract class Enemy : MonoBehaviour
         transform.Rotate(0f, 0f, facing == FACING_DIRECTION.LEFT ? 180f : 0f);
         GetComponent<SpriteRenderer>().flipY = facing == FACING_DIRECTION.LEFT;
     }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }

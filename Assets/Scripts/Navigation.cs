@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-struct NavNode {
+struct NavNode
+{
     public NavNode(TileCoord coord, float cost)
     {
         this.coord = coord;
@@ -42,13 +43,14 @@ public class Navigation : MonoBehaviour
         var start = GridManager.Instance.GetTileCoordFromWorld(transform.position);
         var path = CalculatePath(start, target, tolerance);
         lastTolerance = tolerance;
-        if(path == null)
+        if (path == null)
         {
             Debug.LogWarning(gameObject.name + " can't navigate to " + target.ToString());
             IsWalking = false;
             animator.SetBool("Walking", false);
             return;
-        } else
+        }
+        else
         {
             IsWalking = true;
             nextNavPosition = transform.position;
@@ -60,10 +62,10 @@ public class Navigation : MonoBehaviour
     {
         Interest closest = null;
         float shortest = 9999999999f;
-        foreach(var i in interests)
+        foreach (var i in interests)
         {
             var distance = DistanceTo(i);
-            if(distance >=0 && distance < shortest)
+            if (distance >= 0 && distance < shortest)
             {
                 shortest = distance;
                 closest = i;
@@ -81,12 +83,12 @@ public class Navigation : MonoBehaviour
     {
         var start = GridManager.Instance.GetTileCoordFromWorld(transform.position);
         var path = CalculatePath(start, target, tolerance);
-        if(path == null)
+        if (path == null)
         {
             return -1;
         }
         float distance = 0;
-        foreach(var n in path)
+        foreach (var n in path)
         {
             distance += n.cost;
         }
@@ -97,23 +99,25 @@ public class Navigation : MonoBehaviour
     public void Stop()
     {
         IsWalking = false;
+        animator.SetBool("Walking", false);
     }
 
     private void Update()
     {
-        if(IsWalking)
+        if (IsWalking)
         {
-            if(Vector3.Distance(transform.position,nextNavPosition)< 0.1f)
+            if (Vector3.Distance(transform.position, nextNavPosition) < 0.1f)
             {
                 transform.position = nextNavPosition;
                 IsWalking = navQueue.Count > 0;
-                if(IsWalking)
+                if (IsWalking)
                 {
                     nextNavPosition = GridManager.Instance.GetWorldPosFromTile(navQueue.Dequeue().coord);
 
                 }
                 animator.SetBool("Walking", IsWalking);
-            } else
+            }
+            else
             {
                 transform.position += (nextNavPosition - transform.position).normalized * Speed * Time.deltaTime;
             }
@@ -122,7 +126,7 @@ public class Navigation : MonoBehaviour
 
     private void Recalculate()
     {
-        if(IsWalking)
+        if (IsWalking)
         {
             IsWalking = false;
             Navigate(navQueue.ToArray()[navQueue.Count - 1].coord, lastTolerance);
@@ -131,7 +135,7 @@ public class Navigation : MonoBehaviour
 
     public static void RecalculateAll()
     {
-        foreach(var nav in ActiveNavigations)
+        foreach (var nav in ActiveNavigations)
         {
             nav.Recalculate();
         }
@@ -156,7 +160,7 @@ public class Navigation : MonoBehaviour
         {
             openSet.Sort((a, b) => { var diff = fScore[a] - fScore[b]; if (diff > 0) return 1; if (diff < 0) return -1; return 0; });
             var current = openSet[0];
-            if ((tolerance == 0 && current.Equals(goal)) ||  current.Distance(goal) <= tolerance)
+            if ((tolerance == 0 && current.Equals(goal)) || current.Distance(goal) <= tolerance)
             {
                 return ReconstructPath(cameFrom, current);
             }
@@ -176,7 +180,7 @@ public class Navigation : MonoBehaviour
                 var tentativeGScore = gScore[current] + navNode.cost; // WEIGHT
                 if (tentativeGScore < gScore[neighbor])
                 {
-                    cameFrom[neighbor] = new NavNode {coord = current, cost = navNode.cost};
+                    cameFrom[neighbor] = new NavNode { coord = current, cost = navNode.cost };
                     gScore[neighbor] = tentativeGScore;
                     fScore[neighbor] = tentativeGScore + heuristicLine(neighbor, goal);
                     if (!openSet.Contains(neighbor))
@@ -199,8 +203,8 @@ public class Navigation : MonoBehaviour
     private List<NavNode> ReconstructPath(Dictionary<TileCoord, NavNode> cameFrom, TileCoord current)
     {
         var result = new List<NavNode>();
-        result.Add(new NavNode {coord = current, cost = 0 });
-        while(cameFrom.ContainsKey(current))
+        result.Add(new NavNode { coord = current, cost = 0 });
+        while (cameFrom.ContainsKey(current))
         {
             var nextNode = cameFrom[current];
             current = nextNode.coord;

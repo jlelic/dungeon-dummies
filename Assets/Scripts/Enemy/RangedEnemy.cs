@@ -5,6 +5,8 @@ public class RangedEnemy : Enemy
     [SerializeField] Arrow arrowPrefab;
     [SerializeField] GameObject arrowSpawnPoint;
 
+    private bool didShoot = false;
+
     private void Shoot()
     {
         GetComponent<AudioSource>().Play();
@@ -12,11 +14,21 @@ public class RangedEnemy : Enemy
         arrow.GetComponent<Rigidbody2D>().velocity = GetFireDirection().normalized * arrow.arrowSpeed;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
     {
-        if (other.gameObject.tag == "Adventurer")
+        if (!didShoot)
         {
-            GetComponent<Animator>().SetTrigger("Shoot");
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 100f, LayerMask.GetMask("Adventurer"));
+            if (hit.collider != null)
+            {
+                Adventurer adventurer = hit.transform.gameObject.GetComponent<Adventurer>();
+                if (adventurer != null)
+                {
+                    didShoot = true;
+                    GetComponent<Animator>().SetTrigger("Shoot");
+                }
+
+            }
         }
     }
 
