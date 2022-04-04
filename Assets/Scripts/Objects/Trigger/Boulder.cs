@@ -13,21 +13,28 @@ public class Boulder : MonoBehaviour
     private void Start()
     {
         boulderStopped = false;
+        CheckBoulderPath();
     }
+
     private void Update()
     {
         if (!boulderStopped)
         {
-            TileCoord currentTileCoord = GridManager.Instance.GetTileCoordFromWorld(transform.position);
-            TileCoord nextTileCoord = GetNextGridTileCoord(currentTileCoord);
-            if (GridManager.Instance.IsBlocking(nextTileCoord))
-            {
-                endDestination = GridManager.Instance.GetWorldPosFromTile(currentTileCoord);
-            }
-            if (transform.position == endDestination)
-            {
-                StopBoulder();
-            }
+            CheckBoulderPath();
+        }
+    }
+
+    private void CheckBoulderPath()
+    {
+        TileCoord currentTileCoord = GridManager.Instance.GetTileCoordFromWorld(transform.position);
+        TileCoord nextTileCoord = GetNextGridTileCoord(currentTileCoord);
+        if (GridManager.Instance.IsBlocking(nextTileCoord))
+        {
+            endDestination = GridManager.Instance.GetWorldPosFromTile(currentTileCoord);
+        }
+        if (transform.position == endDestination)
+        {
+            StopBoulder();
         }
     }
 
@@ -45,14 +52,14 @@ public class Boulder : MonoBehaviour
     {
         StopBoulder();
         iTween.MoveTo(gameObject, hole.transform.position, 0.4f);
-        iTween.ScaleTo(gameObject, 0.8f*Vector3.one, 0.4f);
+        iTween.ScaleTo(gameObject, 0.8f * Vector3.one, 0.4f);
     }
 
     private void StopBoulder()
     {
         boulderStopped = true;
         var colliders = GetComponents<Collider2D>();
-        foreach(var c in colliders)
+        foreach (var c in colliders)
         {
             c.enabled = false;
         }

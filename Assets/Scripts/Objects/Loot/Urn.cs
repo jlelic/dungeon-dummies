@@ -3,6 +3,7 @@ using UnityEngine;
 public class Urn : LootObject
 {
 
+    [SerializeField] SnakeHazard snakePrefab;
     [SerializeField] Sprite[] spriteVariants;
 
     protected override void Awake()
@@ -19,6 +20,7 @@ public class Urn : LootObject
         {
             objectToTrigger.Trigger();
         }
+        Instantiate<SnakeHazard>(snakePrefab, transform.position, Quaternion.identity, transform);
         adventurer.Poison();
     }
 }

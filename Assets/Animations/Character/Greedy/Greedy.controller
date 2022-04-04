@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GreedyIdle
+  m_Name: Idle_Animation
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -82,7 +82,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GreedyInteract
+  m_Name: Interact_Animation
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -234,9 +234,9 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 440, y: 90, z: 0}
+  m_AnyStatePosition: {x: 20, y: 90, z: 0}
   m_EntryPosition: {x: -10, y: 170, z: 0}
-  m_ExitPosition: {x: 560, y: 20, z: 0}
+  m_ExitPosition: {x: 30, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -7586796798923426961}
 --- !u!1102 &4513820278167341444
@@ -246,7 +246,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GreedyWalk
+  m_Name: Walk_Animation
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

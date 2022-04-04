@@ -20,8 +20,8 @@ public abstract class LootObject : GreedyInterest
     {
         GetComponent<SpriteRenderer>().sprite = lootedState;
         GetComponent<AudioSource>().Play();
-        OnLoot(adventurer);
         IsActive = false;
+        OnLoot(adventurer);
     }
 
     public abstract void OnLoot(Adventurer adventurer);

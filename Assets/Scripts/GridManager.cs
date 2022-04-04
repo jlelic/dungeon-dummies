@@ -88,6 +88,7 @@ public enum TileType
     WALL_SW = 36,
     WALL_S = 37,
     WALL_SE = 38,
+    ANTIDOTE = 42,
 }
 
 public class GridManager : MonoBehaviour
@@ -116,6 +117,7 @@ public class GridManager : MonoBehaviour
         {TileType.CHEST, new TileInfo{} },
         {TileType.STATUE, new TileInfo{Blocking = true} },
         {TileType.URN, new TileInfo{} },
+        {TileType.ANTIDOTE, new TileInfo{} },
         // Enemy
         {TileType.ENEMY_RANGED, new TileInfo {}},
         {TileType.ENEMY_MELEE, new TileInfo {}},
