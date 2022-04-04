@@ -1009,6 +1009,7 @@ GameObject:
   - component: {fileID: 3183824355231699836}
   - component: {fileID: 372876847604135948}
   - component: {fileID: 178212369609482499}
+  - component: {fileID: 7588711445929806359}
   m_Layer: 0
   m_Name: GameManagers
   m_TagString: Untagged
@@ -1058,6 +1059,10 @@ MonoBehaviour:
     prefab: {fileID: 1239876400139341756, guid: 5f7da73f5298c0546ab52315a46b7809, type: 3}
   - tileType: 31
     prefab: {fileID: 8177912840898314232, guid: 1dc5a01f73cba3a4e8fafc48cba034ba, type: 3}
+  - tileType: 6
+    prefab: {fileID: 8177912840898314232, guid: 997715a8c61d27e4c9897cbae4f5c009, type: 3}
+  - tileType: 22
+    prefab: {fileID: 8177912840898314232, guid: 997715a8c61d27e4c9897cbae4f5c009, type: 3}
 --- !u!114 &372876847604135948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1090,6 +1095,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510a5bc3257a3cb4d81f6cb87f2bb196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7588711445929806359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183824355231699838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6d959cbbf0a8d45a7932aaa6e771fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BloodSquishParticleEffect: {fileID: 1915563807190241461, guid: 5d81daf4d64f7c549bb0e44f95a488d8, type: 3}
+  BloodSprayUpParticleEffect: {fileID: 1915563807190241461, guid: b1c1b921619d207428fff41468dab4a1, type: 3}
+  MaterialKilledSquish: {fileID: 2100000, guid: 84f3de3a56011674e9dd97efe3c6dccb, type: 2}
+  MaterialKilledBurn: {fileID: 2100000, guid: 66ef080cd72706c4eb32f00981bdb7d6, type: 2}
+  SoundSquish: {fileID: 8300000, guid: 8e631c9c356666347b15f2927efe4b4f, type: 3}
 --- !u!1 &3766967227041751982
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -14,9 +15,12 @@ public class Adventurer : MonoBehaviour
 {
     private bool active = false;
     [SerializeField] GameObject BurnParticleEffectPrefab;
-    new SpriteRenderer renderer;
+    protected new SpriteRenderer renderer;
     protected Navigation navigation;
     protected Animator animator;
+    protected AudioSource audioSource;
+    protected ObjectStore store;
+    protected GridManager grid;
 
     [SerializeField] ProgressBar progressBar;
     protected AdventurerState State;
@@ -28,6 +32,10 @@ public class Adventurer : MonoBehaviour
         animator = GetComponent<Animator>();
         renderer = GetComponent<SpriteRenderer>();
         navigation = GetComponent<Navigation>();
+        audioSource = GetComponent<AudioSource>();
+        store = ObjectStore.Instance;
+        grid = GridManager.Instance;
+
         State = AdventurerState.Idle;
     }
 
@@ -69,7 +77,14 @@ public class Adventurer : MonoBehaviour
                     }
                     else
                     {
-                        navigation.Navigate(CurrentInterest);
+                        if(CurrentInterest is Escape)
+                        {
+                            navigation.ForceNavigate(CurrentInterest);
+                        }
+                        else
+                        {
+                            navigation.Navigate(CurrentInterest);
+                        }
                         State = AdventurerState.Moving;
                     }
                 }
@@ -95,6 +110,7 @@ public class Adventurer : MonoBehaviour
     {
         active = false;
         navigation.Stop();
+        renderer.material = store.MaterialKilledBurn;
         Utils.tweenColor(renderer, Color.black, 0.2f);
         Instantiate(BurnParticleEffectPrefab, transform.position, Quaternion.identity, transform);
         iTween.ValueTo(gameObject, iTween.Hash(
@@ -107,20 +123,54 @@ public class Adventurer : MonoBehaviour
             ));
     }
 
-    public void Smash()
+    public void Fall(Vector3 holePosition, bool spikes)
     {
         active = false;
         navigation.Stop();
+        if(spikes)
+        {
+            Utils.tweenColor(renderer, new Color(1, 0.2f, 0.2f), 0.8f);
+        }
+        iTween.MoveTo(gameObject, iTween.Hash(
+            "position", holePosition,
+            "time", 0.4f,
+            "easetype", iTween.EaseType.easeOutQuad
+            ));
+        iTween.RotateAdd(gameObject, new Vector3(0, 0, UnityEngine.Random.Range(-60f,-85f)), 0.4f);
+        iTween.ScaleTo(gameObject, iTween.Hash(
+            "scale", new Vector3(0.5f, 0.5f),
+            "time", 0.4f,
+            "easetype", iTween.EaseType.easeOutQuad,
+            "oncomplete", (Action)(() =>
+            {
+                if (spikes)
+                {
+                    Utils.PlayAudio(audioSource, store.SoundSquish, true);
+                    Instantiate(ObjectStore.Instance.BloodSprayUpParticleEffect, transform.position, Quaternion.identity, transform);
+                }
+                OnDeath();
+            })
+            ));
+    }
+
+    public void Squish()
+    {
+        active = false;
+        navigation.Stop();
+        renderer.material = store.MaterialKilledSquish;
         // TODO - change animation to smash effect
-        Utils.tweenColor(renderer, Color.black, 0.2f);
-        Instantiate(BurnParticleEffectPrefab, transform.position, Quaternion.identity, transform);
+        Utils.PlayAudio(audioSource, store.SoundSquish, true);
+        Utils.tweenColor(renderer, new Color(1, 0.2f, 0.2f), 0.8f);
+        renderer.sortingOrder = 2;
+        Instantiate(ObjectStore.Instance.BloodSquishParticleEffect, transform.position, Quaternion.identity, transform);
         iTween.ValueTo(gameObject, iTween.Hash(
             //"delay", 0.3f,
-            "time", 1.5f,
+            "time", 0.25f,
             "from", 0f,
             "to", 1f,
+            "easetype", iTween.EaseType.linear,
             "onupdate", (System.Action<float>)((value) => { renderer.material.SetFloat("_Step", value); }),
-            "oncomplete", (System.Action)(() => { OnDeath(); Destroy(gameObject); })
+            "oncomplete", (System.Action)(() => { OnDeath(); })
             ));
     }
 

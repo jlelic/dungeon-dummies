@@ -33,12 +33,30 @@ public class Navigation : MonoBehaviour
         ActiveNavigations.Add(this);
     }
 
-    public void Navigate(Interest interest)
+    public bool ForceNavigate(Interest interest)
     {
-        Navigate(interest.Coord, interest.InteractableDistance);
+        return ForceNavigate(interest.Coord, interest.InteractableDistance);
     }
 
-    public void Navigate(TileCoord target, float tolerance = 0)
+    public bool ForceNavigate(TileCoord target, float tolerance = 0)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            var canGo = Navigate(target, tolerance + i);
+            if(canGo)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool Navigate(Interest interest)
+    {
+        return Navigate(interest.Coord, interest.InteractableDistance);
+    }
+
+    public bool Navigate(TileCoord target, float tolerance = 0)
     {
         var start = GridManager.Instance.GetTileCoordFromWorld(transform.position);
         var path = CalculatePath(start, target, tolerance);
@@ -48,13 +66,14 @@ public class Navigation : MonoBehaviour
             Debug.LogWarning(gameObject.name + " can't navigate to " + target.ToString());
             IsWalking = false;
             animator.SetBool("Walking", false);
-            return;
+            return false;
         }
         else
         {
             IsWalking = true;
             nextNavPosition = transform.position;
             navQueue = new Queue<NavNode>(path);
+            return true;
         }
     }
 

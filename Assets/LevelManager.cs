@@ -27,6 +27,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         var adventurers = GameObject.FindGameObjectsWithTag("Adventurer");
         AdventurersRemaining = adventurers.Length;
     }
@@ -58,7 +59,7 @@ public class LevelManager : MonoBehaviour
         SomeoneDied = true;
         if(AdventurersRemaining == 0)
         {
-            UIManager.Instance.RestartLevel();
+            UIManager.Instance.RestartLevel(3f);
         }
         MusicMixer.instance.QueueEnd();
     }

@@ -36,7 +36,7 @@ public class Boulder : MonoBehaviour
         if (other.gameObject.tag == "Adventurer")
         {
             Adventurer adventurer = other.gameObject.GetComponent<Adventurer>();
-            adventurer.Smash();
+            adventurer.Squish();
         }
     }
 

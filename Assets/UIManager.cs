@@ -120,7 +120,7 @@ public class UIManager : MonoBehaviour
         RestartLevel();
     }
 
-    public void RestartLevel()
+    public void RestartLevel(float delay = 0)
     {
         var lights = FindObjectsOfType<Light2D>();
         foreach(var light in lights)
@@ -138,7 +138,7 @@ public class UIManager : MonoBehaviour
         }
         Overlay.gameObject.SetActive(true);
         Overlay.color = Color.clear;
-        Utils.tweenColor(Overlay, Color.black, 0.8f, 0.2f, ignoreTimeScale: true, callback: LevelManager.RestartLevel);
+        Utils.tweenColor(Overlay, Color.black, 0.8f, 0.2f + delay, ignoreTimeScale: true, callback: LevelManager.RestartLevel);
     }
 
     void UncoverOverlay()

@@ -200,7 +200,10 @@ public class GridManager : MonoBehaviour
                 var position = GetWorldPosFromTile(coord);
                 newObject.transform.position = position;
                 var renderer = newObject.GetComponent<SpriteRenderer>();
-                renderer.sortingOrder = 6;
+                if (renderer != null)
+                {
+                    renderer.sortingOrder = 6;
+                }
                 var draggable = newObject.GetComponent<Draggable>();
                 if (draggable != null)
                 {

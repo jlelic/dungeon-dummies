@@ -32,7 +32,7 @@ public class DummyAdventurer : MonoBehaviour
         {
             foreach (var interest in curiousInterests)
             {
-                interest.Interact();
+                interest.Interact(null);
             }
         }
         if (Input.GetKeyDown(KeyCode.G))

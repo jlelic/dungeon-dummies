@@ -12,7 +12,7 @@ public abstract class TriggerObject : CuriousInterest
         GetComponent<SpriteRenderer>().sprite = offState;
     }
 
-    public override void Interact()
+    public override void Interact(Adventurer adventurer)
     {
         onTriggerInteract();
     }
