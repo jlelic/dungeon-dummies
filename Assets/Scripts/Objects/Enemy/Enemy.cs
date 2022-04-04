@@ -34,7 +34,8 @@ public abstract class Enemy : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        Instantiate(ObjectStore.Instance.BoneExplosionParticleEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject,0.2f);
     }
 
     // Called by Attack Animation event 

@@ -8,6 +8,7 @@ public class ObjectStore : MonoBehaviour
     [SerializeField] public GameObject BloodSquishParticleEffect;
     [SerializeField] public GameObject BloodSprayUpParticleEffect;
     [SerializeField] public GameObject BurnParticleEffect;
+    [SerializeField] public GameObject BoneExplosionParticleEffect;
     [Header("Materials")]
     [SerializeField] public Material MaterialKilledSquish;
     [SerializeField] public Material MaterialKilledBurn;
