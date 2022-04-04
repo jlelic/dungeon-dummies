@@ -31,8 +31,8 @@ public class BrusherBehavior : Adventurer
         State = AdventurerState.Attacking;
         GetComponent<Animator>().SetTrigger("Attack");
         yield return new WaitForSeconds(TIME_TO_ATTACK);
-        enemy.Die();
         State = AdventurerState.Idle;
+        enemy.Die();
     }
 
     private IEnumerator Blocking()

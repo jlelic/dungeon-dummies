@@ -1,19 +1,24 @@
 using UnityEngine;
 
-
 [RequireComponent(typeof(Animator)), RequireComponent(typeof(Collider2D))]
-public class WallFireTrap : Triggerable
+public class WallFireTrap : Toggleable
 {
 
     [SerializeField] FireFromWall firePrefab;
     [SerializeField] Sprite disabledState;
+    new SpriteRenderer renderer;
+    Sprite enabledState;
 
-    private bool trapEnabled;
+
+   [SerializeField] bool trapEnabled;
 
     protected override void Awake()
     {
         base.Awake();
+        CanPlayerInteract = false;
         trapEnabled = true;
+        renderer = GetComponent<SpriteRenderer>();
+        enabledState = renderer.sprite;
     }
 
     public override void Trigger()
@@ -26,9 +31,18 @@ public class WallFireTrap : Triggerable
 
     private void OnMouseDown()
     {
+        if(!LevelManager.Instance.IsPlaying)
+        {
+            Toggle();
+        }
+    }
+
+
+    public override void Toggle()
+    {
+        trapEnabled = !trapEnabled;
         GetComponent<AudioSource>().Play();
-        GetComponent<SpriteRenderer>().sprite = disabledState;
-        trapEnabled = false;
-        GetComponent<Animator>().SetBool("doused", true);
+        renderer.sprite = trapEnabled ? enabledState : disabledState;
+        GetComponent<Animator>().SetBool("doused", !trapEnabled);
     }
 }
