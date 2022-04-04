@@ -10,6 +10,16 @@ public class Arrow : MonoBehaviour
         Destroy(gameObject, 10f);
     }
 
+    private void Update()
+    {
+        var grid = GridManager.Instance;
+        var coord = grid.GetTileCoordFromWorld(transform.position);
+        if (grid.IsBlocking(coord))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Adventurer")
