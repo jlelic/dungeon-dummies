@@ -26,6 +26,12 @@ TextureImporter:
   - first:
       213: -960159382117123158
     second: curious_7
+  - first:
+      213: 4255890505080984749
+    second: curious_8
+  - first:
+      213: 4544958515992615818
+    second: curious_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -302,6 +308,48 @@ TextureImporter:
       bones: []
       spriteID: aab762d0124dca2f0800000000000000
       internalID: -960159382117123158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curious_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da45f4e9dd5ff0b30800000000000000
+      internalID: 4255890505080984749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curious_9
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8b50a8a0bfe21f30800000000000000
+      internalID: 4544958515992615818
       vertices: []
       indices: 
       edges: []
