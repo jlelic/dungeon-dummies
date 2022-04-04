@@ -10,14 +10,29 @@ EditorBuildSettings:
     guid: 25497ab710793304ba62d9f7af5f00b5
   - enabled: 1
     path: Assets/Scenes/Levels/1.unity
-    guid: dc140067fddadd2499a289d42e46bb6b
+    guid: a46104c0cb6e7a44d9bf10edee5314c8
   - enabled: 1
     path: Assets/Scenes/Levels/2.unity
-    guid: 172292ffbfe46d541a6f12f37dac7b80
-  - enabled: 0
-    path: Assets/Scenes/JopkovSvet.unity
-    guid: 3c82384f1bc60ac4390b8fcbd511e634
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    guid: fe4ee905d332e024ab2ff25c537625bd
+  - enabled: 1
+    path: Assets/Scenes/Levels/3.unity
+    guid: ba752f595ece2674788c039a56fa9a76
+  - enabled: 1
+    path: Assets/Scenes/Levels/4.unity
+    guid: 9942a59acc3ce944288d06242e1084d2
+  - enabled: 1
+    path: Assets/Scenes/Levels/5.unity
+    guid: 2ac0140ef699412499012755d97af53b
+  - enabled: 1
+    path: Assets/Scenes/Levels/6.unity
+    guid: 4edacf467762f1e42879fd027a617796
+  - enabled: 1
+    path: Assets/Scenes/Levels/7.unity
+    guid: 080c6dfc1a30e83489a57dc42bdc9df6
+  - enabled: 1
+    path: Assets/Scenes/Levels/8.unity
+    guid: f397d621a00deee4d968aaf2a65de35e
+  - enabled: 1
+    path: Assets/Scenes/Levels/9.unity
+    guid: 927fb2a2fec41d84a88d0bca7c31d044
   m_configObjects: {}

@@ -29,7 +29,7 @@
 37,38,38,38,38,38,38,38,38,39
 </data>
  </layer>
- <layer id="4" name="interactable" width="10" height="10" visible="0">
+ <layer id="4" name="interactable" width="10" height="10">
   <data encoding="csv">
 0,0,0,0,17,0,0,17,0,0,
 0,0,0,0,0,0,0,0,0,0,

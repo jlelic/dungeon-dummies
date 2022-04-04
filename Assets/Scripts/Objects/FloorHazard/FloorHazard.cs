@@ -16,6 +16,7 @@ public class FloorHazard : MonoBehaviour
         {
             CoveredUp++;
             boulder.FallIntoHole(this);
+            GridManager.Instance.NeutralizeTile(GridManager.Instance.GetTileCoordFromWorld(transform.position));
         }
         if (collision.gameObject.tag == "Platform")
         {
