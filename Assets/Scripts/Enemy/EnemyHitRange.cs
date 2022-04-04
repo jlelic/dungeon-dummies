@@ -9,7 +9,7 @@ public class EnemyHitRange : MonoBehaviour
             Adventurer adventurer = other.gameObject.GetComponent<Adventurer>();
             if (adventurer != null)
             {
-                transform.parent.GetComponent<MeleeEnemy>().Attack(adventurer);
+                transform.parent.GetComponent<MeleeEnemy>().Attack(adventurer, adventurer.transform.position.x < transform.position.x ? FACING_DIRECTION.LEFT : FACING_DIRECTION.RIGHT);
             }
         }
     }

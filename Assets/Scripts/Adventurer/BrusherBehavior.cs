@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator)), RequireComponent(typeof(AudioSource))]
 public class BrusherBehavior : Adventurer
 {
     private const float TIME_TO_ATTACK = 1.25f;
@@ -12,6 +12,8 @@ public class BrusherBehavior : Adventurer
     }
 
     public override void PierceByArrow() { }
+    public override void Kill() { }
+
 
     private IEnumerator Attacking(Enemy enemy)
     {
@@ -20,6 +22,11 @@ public class BrusherBehavior : Adventurer
         yield return new WaitForSeconds(TIME_TO_ATTACK);
         enemy.Die();
         State = AdventurerState.Idle;
+    }
+
+    public void PlayAttackSFX()
+    {
+        GetComponent<AudioSource>().Play();
     }
 
     public void Attack(Enemy enemy)
