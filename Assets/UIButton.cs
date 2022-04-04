@@ -54,18 +54,23 @@ public class UIButton : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(IsToggled && IsToggleType)
+        {
+            return;
+        }
         transform.position = originalPosition;
         renderer.sprite = SpriteClicked;
     }
 
     private void OnMouseUp()
     {
-        renderer.sprite = spriteOriginal;
 
         if (IsToggleType && IsToggled)
         {
             return;
         }
+
+        renderer.sprite = spriteOriginal;
 
         if (IsToggleType)
         {

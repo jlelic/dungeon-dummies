@@ -29,15 +29,6 @@ public class WallFireTrap : Toggleable
         }
     }
 
-    private void OnMouseDown()
-    {
-        if(!LevelManager.Instance.IsPlaying)
-        {
-            Toggle();
-        }
-    }
-
-
     public override void Toggle()
     {
         trapEnabled = !trapEnabled;
