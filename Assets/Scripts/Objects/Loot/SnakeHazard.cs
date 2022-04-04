@@ -15,19 +15,27 @@ public class SnakeHazard : MonoBehaviour
         GetComponent<AudioSource>().Play();
         spriteRenderer = GetComponent<SpriteRenderer>();
         direction = RandomizeDirection();
-        StartCoroutine(Fade());
-    }
 
-    private void FixedUpdate()
-    {
-        transform.position += direction * speed * Time.deltaTime;
-        float rotation = Vector2.SignedAngle(Vector2.left, new Vector2(direction.x, direction.y));
-        transform.rotation = Quaternion.Euler(0, 0, rotation);
+        spriteRenderer.flipY = direction.x * direction.y > 0;
+        float rotation = Vector2.SignedAngle(transform.position, new Vector2(direction.x, direction.y));
+        transform.rotation = Quaternion.Euler(0, 0, -rotation);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x, direction.y).normalized * speed;
+
+        StartCoroutine(Fade());
     }
 
     private Vector2 RandomizeDirection()
     {
-        return new Vector2(Random.Range(0, 1f), Random.Range(0, 1f));
+        return new Vector2(Random.Range(0.5f, 1f) * RandomSign(), Random.Range(0.5f, 1f) * RandomSign());
+    }
+
+    private float RandomSign()
+    {
+        if (Random.Range(0, 2) == 0)
+        {
+            return -1;
+        }
+        return 1;
     }
 
     public IEnumerator Fade()
