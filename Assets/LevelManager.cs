@@ -92,5 +92,6 @@ public class LevelManager : MonoBehaviour
     public void LoadLevel(int levelNum)
     {
         SceneManager.LoadScene("Scenes/Levels/" + levelNum);
+        MusicMixer.instance.QueueLow();
     }
 }

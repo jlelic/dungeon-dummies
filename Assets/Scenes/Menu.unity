@@ -205,7 +205,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 16
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 320, y: 160}
+  m_ReferenceResolution: {x: 320, y: 180}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
@@ -225,7 +225,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 619746941}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -356,8 +356,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.337, y: -2}
-  m_SizeDelta: {x: 276.197, y: 29.904}
+  m_AnchoredPosition: {x: 111.7, y: 31.7}
+  m_SizeDelta: {x: 85.097, y: 94.878}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &604267394
 MonoBehaviour:
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 48, y: 16}
+  m_CellSize: {x: 32, y: 16}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -421,7 +421,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.13536845, g: 0.16891916, b: 0.24528301, a: 0}
+  m_BackGroundColor: {r: 0.09411765, g: 0.08627451, b: 0.16470589, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AssetsPPU: 16
   m_RefResolutionX: 320
-  m_RefResolutionY: 16
+  m_RefResolutionY: 180
   m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 0
@@ -591,6 +591,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicMixer
       objectReference: {fileID: 0}
+    - target: {fileID: 6203131056082596494, guid: 6bac4087e8e2e2c45a98ba38d69eac86, type: 3}
+      propertyPath: fullSong
+      value: 
+      objectReference: {fileID: 8300000, guid: 23c7104ef6a37c84ab84dcc5cbb9d682, type: 3}
     - target: {fileID: 6203131056082596495, guid: 6bac4087e8e2e2c45a98ba38d69eac86, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -715,7 +719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 374024295956702760, guid: c89cfb1f6b4cae442b779a956490bc75, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 374024295956702766, guid: c89cfb1f6b4cae442b779a956490bc75, type: 3}
       propertyPath: m_Name
@@ -739,7 +743,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 374024295956702767, guid: c89cfb1f6b4cae442b779a956490bc75, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 374024295956702767, guid: c89cfb1f6b4cae442b779a956490bc75, type: 3}
       propertyPath: m_AnchorMin.x
@@ -747,15 +751,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 374024295956702767, guid: c89cfb1f6b4cae442b779a956490bc75, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 374024295956702767, guid: c89cfb1f6b4cae442b779a956490bc75, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 250
+      value: 84.125
       objectReference: {fileID: 0}
     - target: {fileID: 374024295956702767, guid: c89cfb1f6b4cae442b779a956490bc75, type: 3}
       propertyPath: m_SizeDelta.y
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 374024295956702767, guid: c89cfb1f6b4cae442b779a956490bc75, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 374024295956702767, guid: c89cfb1f6b4cae442b779a956490bc75, type: 3}
       propertyPath: m_LocalPosition.x
@@ -791,7 +799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 374024295956702767, guid: c89cfb1f6b4cae442b779a956490bc75, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 23.38
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 374024295956702767, guid: c89cfb1f6b4cae442b779a956490bc75, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -890,10 +898,10 @@ RectTransform:
   m_Father: {fileID: 231332136}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.003, y: 60.692}
-  m_SizeDelta: {x: 237.46, y: 34.226}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -40}
+  m_SizeDelta: {x: 128, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1861383530
 MonoBehaviour:
@@ -904,7 +912,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1861383528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -915,20 +923,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 86fcaf8f3aed28e469a9932272548a0d, type: 3}
-    m_FontSize: 16
-    m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 128
-    m_Alignment: 1
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Dungeon Dummies
+  m_Sprite: {fileID: 21300000, guid: 489f0b87bc4b8d64f9c5f64081617de2, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1861383531
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1050,7 +1054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7309787846723174181, guid: a9ed7828d10f59640b46adf9b404bb92, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.3
+      value: -3.3125
       objectReference: {fileID: 0}
     - target: {fileID: 7309787846723174181, guid: a9ed7828d10f59640b46adf9b404bb92, type: 3}
       propertyPath: m_LocalPosition.z

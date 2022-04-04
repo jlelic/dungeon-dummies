@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: 1
+  fullSong: {fileID: 8300000, guid: 23c7104ef6a37c84ab84dcc5cbb9d682, type: 3}
   startClip: {fileID: 8300000, guid: 277a6041cdc1e574ca1e8fbbac41611d, type: 3}
   lowClip: {fileID: 8300000, guid: ee1153c45a67b744fa9dc78afe262cad, type: 3}
   highClip: {fileID: 8300000, guid: 3a3c269beec948f4098d419143f47b88, type: 3}

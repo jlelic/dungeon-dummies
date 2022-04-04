@@ -8,6 +8,7 @@ public class MusicMixer : MonoBehaviour
 
     [Range(0f, 1f)]
     [SerializeField] float volume = 1;
+    [SerializeField] AudioClip fullSong;
     [SerializeField] AudioClip startClip;
     [SerializeField] AudioClip lowClip;
     [SerializeField] AudioClip highClip;
@@ -33,7 +34,7 @@ public class MusicMixer : MonoBehaviour
     {
         this.audioSource = GetComponent<AudioSource>();
 
-        StartMusic();
+        PlayFullSong();
     }
 
     void Update()
@@ -67,6 +68,12 @@ public class MusicMixer : MonoBehaviour
         float clipLength = this.audioSource.clip.length;
         float currentTime = this.audioSource.time;
         return this.segmentLength * Mathf.Ceil(currentTime / segmentLength);
+    }
+
+    public void PlayFullSong() {
+        this.audioSource.clip = fullSong;
+        this.audioSource.loop = true;
+        this.audioSource.Play();
     }
 
     public void StartMusic() {
