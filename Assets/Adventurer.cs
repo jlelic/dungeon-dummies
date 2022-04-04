@@ -174,7 +174,7 @@ public class Adventurer : MonoBehaviour
             ));
         iTween.RotateAdd(gameObject, new Vector3(0, 0, UnityEngine.Random.Range(-60f, -85f)), 0.4f);
         iTween.ScaleTo(gameObject, iTween.Hash(
-            "scale", Vector3.one*targetScale,
+            "scale", Vector3.one * targetScale,
             "time", 0.4f,
             "easetype", iTween.EaseType.easeOutQuad,
             "oncomplete", (Action)(() =>
@@ -236,6 +236,7 @@ public class Adventurer : MonoBehaviour
 
     void OnDeath()
     {
+        GetComponent<Collider2D>().enabled = false;
         LevelManager.Instance.OnAdventurerDeath();
     }
 
