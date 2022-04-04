@@ -4,7 +4,6 @@ public class Urn : LootObject
 {
 
     [SerializeField] Sprite[] spriteVariants;
-    [SerializeField] AudioClip snakeHissSFX;
 
     protected override void Awake()
     {
@@ -20,7 +19,6 @@ public class Urn : LootObject
         {
             objectToTrigger.Trigger();
         }
-        GetComponent<AudioSource>().PlayOneShot(snakeHissSFX);
         adventurer.Poison();
     }
 }

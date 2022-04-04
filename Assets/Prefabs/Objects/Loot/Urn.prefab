@@ -94,7 +94,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3da9dbffa6e76ce4ca3ffe7a88969fac, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 87e63b7a29b27d84691422f79b034364, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -199,5 +199,3 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5b3fcbe8a7c607247ab21e9d2d176dab, type: 3}
   - {fileID: 21300000, guid: b3f2f314b9c3d4e4fb415c9b9bc50f2b, type: 3}
   - {fileID: 21300000, guid: f526a3f0f3ff63f4b85bfd4021640990, type: 3}
-  snakePrefab: {fileID: 5524447692686160382, guid: a56ec0d47c867ec4997bcfdd6df6788f, type: 3}
-  snakeHissSFX: {fileID: 8300000, guid: 87e63b7a29b27d84691422f79b034364, type: 3}
