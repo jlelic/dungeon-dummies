@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class GreedyBehavior : Adventurer
 {
-    struct InterestInfo {
+    struct InterestInfo
+    {
         public GreedyInterest interest;
         public bool seen;
         public bool completed;
@@ -13,7 +14,8 @@ public class GreedyBehavior : Adventurer
 
     [SerializeField] ThinkBubble thinkBubble;
 
-    List<InterestInfo> interests;
+    private List<InterestInfo> interests;
+
     protected override void Start()
     {
         base.Start();
@@ -22,7 +24,15 @@ public class GreedyBehavior : Adventurer
         var greedyInterests = FindObjectsOfType<GreedyInterest>();
         foreach (var i in greedyInterests)
         {
-            interests.Add(new InterestInfo{ interest = i });
+            interests.Add(new InterestInfo { interest = i });
+        }
+    }
+
+    public override void Poison()
+    {
+        if (!isPoisonImmune)
+        {
+            Kill();
         }
     }
 
@@ -30,7 +40,7 @@ public class GreedyBehavior : Adventurer
     {
         var seenInterests = interests.FindAll(i => i.seen && !i.completed).ConvertAll<Interest>(i => i.interest);
         var closest = navigation.GetClosestInterest(seenInterests);
-        if(closest == null)
+        if (closest == null)
         {
             return base.GetNextInterest();
         }
@@ -39,7 +49,7 @@ public class GreedyBehavior : Adventurer
 
     protected override void AIUpdate()
     {
-        if(State == AdventurerState.Interacting)
+        if (State == AdventurerState.Interacting)
         {
             return;
         }
@@ -47,14 +57,14 @@ public class GreedyBehavior : Adventurer
         for (int i = 0; i < interests.Count; i++)
         {
             var info = interests[i];
-            if(!info.seen && !info.completed)
+            if (!info.seen && !info.completed)
             {
-                if(CanSee(info.interest))
+                if (CanSee(info.interest))
                 {
                     navigation.Stop();
                     interests[i] = new InterestInfo { interest = info.interest, seen = true };
                     State = AdventurerState.Idle;
-                    if(!foundSomething)
+                    if (!foundSomething)
                     {
                         thinkBubble.Think(info.interest);
                     }

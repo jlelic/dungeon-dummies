@@ -1,14 +1,10 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
 public class Urn : LootObject
 {
 
     [SerializeField] Sprite[] spriteVariants;
-    [SerializeField] SnakeHazard snakePrefab;
     [SerializeField] AudioClip snakeHissSFX;
-
-    private bool hazardCleared;
 
     protected override void Awake()
     {
@@ -16,16 +12,6 @@ public class Urn : LootObject
         GetComponent<SpriteRenderer>().sprite = pickedSprite;
         nonLootedState = pickedSprite;
         lootedState = pickedSprite;
-        hazardCleared = false;
-    }
-
-    private void OnMouseDown()
-    {
-        if (!hazardCleared)
-        {
-            hazardCleared = true;
-            Instantiate<SnakeHazard>(snakePrefab, transform.position, Quaternion.identity, transform);
-        }
     }
 
     public override void OnLoot(Adventurer adventurer)
@@ -34,10 +20,7 @@ public class Urn : LootObject
         {
             objectToTrigger.Trigger();
         }
-        if (!hazardCleared)
-        {
-            GetComponent<AudioSource>().PlayOneShot(snakeHissSFX);
-            adventurer.Kill();
-        }
+        GetComponent<AudioSource>().PlayOneShot(snakeHissSFX);
+        adventurer.Poison();
     }
 }

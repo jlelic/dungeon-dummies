@@ -30,6 +30,8 @@ public class Adventurer : MonoBehaviour
     [SerializeField] protected AdventurerState State;
     Interest CurrentInterest;
 
+    public bool isPoisonImmune { get; set; }
+
     private float sinceLastAiUpdate;
 
 
@@ -234,6 +236,8 @@ public class Adventurer : MonoBehaviour
             })
             ));
     }
+
+    public virtual void Poison() { }
 
     void OnDeath()
     {
