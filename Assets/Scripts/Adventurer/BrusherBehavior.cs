@@ -5,14 +5,25 @@ using System.Collections;
 public class BrusherBehavior : Adventurer
 {
     private const float TIME_TO_ATTACK = 1.25f;
+    private const float TIME_TO_BLOCK = 0.75f;
+
 
     protected override void Start()
     {
         base.Start();
     }
 
-    public override void PierceByArrow() { }
-    public override void Kill() { }
+    public override void PierceByArrow()
+    {
+        navigation.Stop();
+        StartCoroutine(Blocking());
+
+    }
+    public override void Kill()
+    {
+        navigation.Stop();
+        StartCoroutine(Blocking());
+    }
 
 
     private IEnumerator Attacking(Enemy enemy)
@@ -21,6 +32,14 @@ public class BrusherBehavior : Adventurer
         GetComponent<Animator>().SetTrigger("Attack");
         yield return new WaitForSeconds(TIME_TO_ATTACK);
         enemy.Die();
+        State = AdventurerState.Idle;
+    }
+
+    private IEnumerator Blocking()
+    {
+        State = AdventurerState.Blocking;
+        GetComponent<Animator>().SetTrigger("Block");
+        yield return new WaitForSeconds(TIME_TO_BLOCK);
         State = AdventurerState.Idle;
     }
 

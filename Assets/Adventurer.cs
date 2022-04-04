@@ -9,6 +9,7 @@ public enum AdventurerState
     Leaving,
     Interacting,
     Attacking,
+    Blocking,
     Thinking
 }
 
