@@ -10,7 +10,7 @@ public class WallFireTrap : Triggerable
 
     private bool trapEnabled;
 
-    void Awake()
+    protected override void Awake()
     {
         base.Awake();
         trapEnabled = true;

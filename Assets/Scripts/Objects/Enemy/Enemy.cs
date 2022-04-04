@@ -10,8 +10,8 @@ public enum FACING_DIRECTION
 public abstract class Enemy : MonoBehaviour
 {
     public FACING_DIRECTION facing;
-
     protected bool active;
+    private Adventurer adventurerToAttack;
 
     protected virtual void Awake()
     {
@@ -35,5 +35,27 @@ public abstract class Enemy : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    // Called by Attack Animation event 
+    public void OnAttack()
+    {
+        GetComponent<AudioSource>().Play();
+        adventurerToAttack.Kill();
+    }
+
+    public virtual void Attack(Adventurer adventurer, FACING_DIRECTION faceTo)
+    {
+        if (active)
+        {
+            adventurerToAttack = adventurer;
+            if (faceTo != facing)
+            {
+                transform.Rotate(0f, 0f, faceTo == FACING_DIRECTION.LEFT ? 180f : 0f);
+                GetComponent<SpriteRenderer>().flipY = faceTo == FACING_DIRECTION.LEFT;
+                facing = faceTo;
+            }
+            GetComponent<Animator>().SetTrigger("Attack");
+        }
     }
 }

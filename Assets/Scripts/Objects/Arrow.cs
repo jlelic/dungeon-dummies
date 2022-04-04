@@ -20,7 +20,11 @@ public class Arrow : MonoBehaviour
         }
         if (other.gameObject.tag == "Platform")
         {
-            Destroy(gameObject);
+            Pillar pillar = other.gameObject.GetComponent<Pillar>();
+            if (pillar)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

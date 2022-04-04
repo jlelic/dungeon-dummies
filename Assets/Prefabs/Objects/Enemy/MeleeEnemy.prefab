@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 442478591598718836}
   - component: {fileID: 442478591598718835}
   m_Layer: 0
-  m_Name: HitRange
+  m_Name: MeleeRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

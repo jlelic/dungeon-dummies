@@ -6,6 +6,7 @@ public class Urn : LootObject
 
     [SerializeField] Sprite[] spriteVariants;
     [SerializeField] SnakeHazard snakePrefab;
+    [SerializeField] AudioClip snakeHissSFX;
 
     private bool hazardCleared;
 
@@ -35,6 +36,7 @@ public class Urn : LootObject
         }
         if (!hazardCleared)
         {
+            GetComponent<AudioSource>().PlayOneShot(snakeHissSFX);
             adventurer.Kill();
         }
     }

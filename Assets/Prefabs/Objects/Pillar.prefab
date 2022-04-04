@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5405004723470120833}
   - component: {fileID: 131783887520006358}
-  - component: {fileID: 2042088121296852471}
   - component: {fileID: 3534818099859403138}
   - component: {fileID: -3044481236673516520}
   - component: {fileID: -8841520763186074751}
+  - component: {fileID: 5961795921765168605}
   m_Layer: 0
   m_Name: Pillar
   m_TagString: Platform
@@ -86,18 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2042088121296852471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239876400139341756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25afd8695a388964f8114fd9ff8649b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &3534818099859403138
 Rigidbody2D:
   serializedVersion: 4
@@ -155,5 +143,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20bf711066e9b0c458342a79b732b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5961795921765168605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239876400139341756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d237974764bf14ea5d27cdc0f407be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
