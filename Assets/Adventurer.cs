@@ -245,8 +245,9 @@ public class Adventurer : MonoBehaviour
         State = AdventurerState.Interacting;
         animator.SetBool("Interacting", true);
         int time = 0;
-        progressBar.ShowProgressBar();
-        while (time < ProgressBar.TIME_TO_LOOT)
+        progressBar.ShowProgressBar(interest.TimeToInteract);
+        interest.BeginInteract();
+        while (time < interest.TimeToInteract)
         {
             time += 5;
             progressBar.UpdateProgresBar(time);

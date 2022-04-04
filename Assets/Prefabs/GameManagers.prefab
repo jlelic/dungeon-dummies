@@ -1064,10 +1064,6 @@ MonoBehaviour:
     prefab: {fileID: 8177912840898314232, guid: 997715a8c61d27e4c9897cbae4f5c009, type: 3}
   - tileType: 5
     prefab: {fileID: 1413319541986065631, guid: d0ac012832479a14489876740825c5f2, type: 3}
-  - tileType: 7
-    prefab: {fileID: 533380888199120193, guid: f3d345c055791d047ab89ceb1de47692, type: 3}
-  - tileType: 8
-    prefab: {fileID: 442478590401542676, guid: 7693e79213ac7fd4fabba63bf2fd17aa, type: 3}
   - tileType: 9
     prefab: {fileID: 4950027340781936225, guid: 49b48d3b7eed50d41b063ba317c3c38e, type: 3}
 --- !u!114 &372876847604135948
@@ -1208,7 +1204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1051827961398139718, guid: 49585632f05ee02439b804c4d342ff22, type: 3}
       propertyPath: m_InstanceId
-      value: -84726
+      value: -94248
       objectReference: {fileID: 0}
     - target: {fileID: 1123353071743322255, guid: 49585632f05ee02439b804c4d342ff22, type: 3}
       propertyPath: m_RootOrder
@@ -1282,7 +1278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 478619195, guid: 2b72a45c22b13cb4aa541daf14386eb0, type: 3}
       propertyPath: m_InstanceId
-      value: -84776
+      value: -94298
       objectReference: {fileID: 0}
     - target: {fileID: 76038237942478318, guid: 2b72a45c22b13cb4aa541daf14386eb0, type: 3}
       propertyPath: m_Name
@@ -1356,7 +1352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7236208266858685906, guid: 1e2022e4ac6df5c45a26169f380242e3, type: 3}
       propertyPath: m_InstanceId
-      value: -84802
+      value: -94324
       objectReference: {fileID: 0}
     - target: {fileID: 7305411765954950663, guid: 1e2022e4ac6df5c45a26169f380242e3, type: 3}
       propertyPath: m_Name

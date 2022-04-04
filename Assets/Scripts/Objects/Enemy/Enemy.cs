@@ -20,6 +20,12 @@ public abstract class Enemy : MonoBehaviour
         GetComponent<SpriteRenderer>().flipY = facing == FACING_DIRECTION.LEFT;
     }
 
+    private void Start()
+    {
+        GridManager grid = GridManager.Instance;
+        TileCoord coord = grid.GetTileCoordFromWorld(transform.position);
+        GridManager.Instance.ClearTile(coord, TileLayer.OBJECT);
+    }
 
     public void Activate()
     {

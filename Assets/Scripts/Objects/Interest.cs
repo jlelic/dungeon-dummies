@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Interest : MonoBehaviour
@@ -7,6 +5,7 @@ public abstract class Interest : MonoBehaviour
     public TileCoord Coord { get { return GridManager.Instance.GetTileCoordFromWorld(transform.position); } }
     public float InteractableDistance { get; protected set; } = 1;
     public bool IsActive { get; protected set; }
+    public int TimeToInteract { get; protected set; } = 100;
 
     public bool CanInteractFrom(Vector3 from)
     {
@@ -15,10 +14,12 @@ public abstract class Interest : MonoBehaviour
 
     public abstract void Interact(Adventurer adventurer);
 
+    public virtual void BeginInteract() { }
+
     public virtual Sprite GetIcon()
     {
         var renderer = GetComponent<SpriteRenderer>();
-        if(renderer == null)
+        if (renderer == null)
         {
             return null;
         }

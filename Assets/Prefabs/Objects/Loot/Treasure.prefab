@@ -94,7 +94,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1bd018ea2d260e741928d100c6214de7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e2687058648e85c4c862dc331d93af70, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -194,4 +194,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToTrigger: {fileID: 0}
   nonLootedState: {fileID: 21300000, guid: 8874c699fcc57e24b93b717730b99f69, type: 3}
-  lootedState: {fileID: 21300000, guid: 209df23d85a28ad4b9beffb404bc04af, type: 3}
+  lootedState: {fileID: 21300000, guid: 37110d1b798eb134ab2c99f5d6697e12, type: 3}
+  openState: {fileID: 21300000, guid: 209df23d85a28ad4b9beffb404bc04af, type: 3}
+  openSFX: {fileID: 8300000, guid: 1bd018ea2d260e741928d100c6214de7, type: 3}

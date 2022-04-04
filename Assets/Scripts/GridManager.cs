@@ -106,10 +106,10 @@ public class GridManager : MonoBehaviour
         {TileType.BRIDGE, new TileInfo{Platform = true} },
         {TileType.PILLAR, new TileInfo{Blocking = true} },
         // FLOOR HAZARDS
-        {TileType.SPIKES, new TileInfo{Cost = 50 } },
-        {TileType.SPIKES_BLOODY, new TileInfo{Cost = 50 } },
-        {TileType.LAVA, new TileInfo{Burning = true, Cost = 50 } },
-        {TileType.PIT, new TileInfo{Cost = 50 } },
+        {TileType.SPIKES, new TileInfo{Hazard = true, Cost = 50 } },
+        {TileType.SPIKES_BLOODY, new TileInfo{Hazard = true, Cost = 50 } },
+        {TileType.LAVA, new TileInfo{Hazard = true, Burning = true, Cost = 50 } },
+        {TileType.PIT, new TileInfo{Hazard = true, Cost = 50 } },
         // TRIGGERS
         {TileType.LEVER, new TileInfo{Blocking = true} },
         {TileType.BUTTON, new TileInfo{Blocking = true} },
@@ -364,16 +364,10 @@ public class GridManager : MonoBehaviour
     {
         var groundTile = GetTile(t, TileLayer.GROUND);
         var isPlatform = TileInfo[GetTile(t, TileLayer.OBJECT)].Platform;
-        if ((groundTile == TileType.LAVA || groundTile == TileType.SPIKES) && !isPlatform)
+        if ((groundTile == TileType.LAVA || groundTile == TileType.SPIKES || groundTile == TileType.PIT) && !isPlatform)
         {
             return 50;
         }
-        //var objectTile = GetTile(t, TileLayer.OBJECT);
-        //if (TileInfo[objectTile].Blocking)
-        //{
-        //    return true;
-        //}
-
         return 1;
     }
 

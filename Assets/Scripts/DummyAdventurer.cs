@@ -44,8 +44,8 @@ public class DummyAdventurer : MonoBehaviour
     IEnumerator LootProgress()
     {
         int time = 0;
-        lootTimer.ShowProgressBar();
-        while (time < ProgressBar.TIME_TO_LOOT)
+        lootTimer.ShowProgressBar(100);
+        while (time < 100)
         {
             time += 5;
             lootTimer.UpdateProgresBar(time);
