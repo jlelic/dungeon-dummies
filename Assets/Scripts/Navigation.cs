@@ -26,10 +26,12 @@ public class Navigation : MonoBehaviour
     [SerializeField] float Speed = 2;
 
     Animator animator;
+    new SpriteRenderer renderer;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        renderer = GetComponent<SpriteRenderer>();
         ActiveNavigations.Add(this);
     }
 
@@ -139,6 +141,12 @@ public class Navigation : MonoBehaviour
             else
             {
                 transform.position += (nextNavPosition - transform.position).normalized * Speed * Time.deltaTime;
+                if(transform.position.x > nextNavPosition.x)
+                {
+                    renderer.flipX = true;
+                } else {
+                    renderer.flipX = false;
+                }
             }
         }
     }
