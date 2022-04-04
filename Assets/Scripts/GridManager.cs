@@ -88,9 +88,7 @@ public enum TileType
     WALL_SW = 36,
     WALL_S = 37,
     WALL_SE = 38,
-
 }
-
 
 public class GridManager : MonoBehaviour
 {
@@ -143,6 +141,7 @@ public class GridManager : MonoBehaviour
 
     Dictionary<TileType, TileBase> Tilebases = new Dictionary<TileType, TileBase>();
     Dictionary<TileLayer, Tilemap> Tilemaps;
+    HashSet<TileCoord> NeutralizedTiles;
     Grid Grid;
 
     [Serializable]
@@ -173,6 +172,7 @@ public class GridManager : MonoBehaviour
         }
         var tileMaps = FindObjectsOfType<Tilemap>();
 
+        NeutralizedTiles = new HashSet<TileCoord>();
         Tilemaps = new Dictionary<TileLayer, Tilemap>();
         foreach (var map in tileMaps)
         {
@@ -200,8 +200,6 @@ public class GridManager : MonoBehaviour
         }
         InstantiateObjects();
     }
-
-
 
     private void InstantiateObjects()
     {
@@ -300,6 +298,16 @@ public class GridManager : MonoBehaviour
         return null;
     }
 
+    public void NeutralizeTile(TileCoord coord)
+    {
+        NeutralizedTiles.Add(coord);
+    }
+
+    public bool IsTileNeutralized(TileCoord coord)
+    {
+        return NeutralizedTiles.Contains(coord);
+    }
+
     public bool IsBlocking(TileCoord t)
     {
         if (!IsInBounds(t))
@@ -335,7 +343,6 @@ public class GridManager : MonoBehaviour
         return IsLos(from, GetWorldPosFromTile(to));
     }
 
-
     public bool IsLos(Vector3 from, Vector3 to)
     {
         var diffX = to.x - from.x;
@@ -365,7 +372,7 @@ public class GridManager : MonoBehaviour
     {
         var groundTile = GetTile(t, TileLayer.GROUND);
         var isPlatform = TileInfo[GetTile(t, TileLayer.OBJECT)].Platform;
-        if ((groundTile == TileType.LAVA || groundTile == TileType.SPIKES || groundTile == TileType.SPIKES_BLOODY || groundTile == TileType.PIT) && !isPlatform)
+        if ((groundTile == TileType.LAVA || groundTile == TileType.SPIKES || groundTile == TileType.SPIKES_BLOODY || groundTile == TileType.PIT) && !isPlatform && !IsTileNeutralized(t))
         {
             return 50;
         }

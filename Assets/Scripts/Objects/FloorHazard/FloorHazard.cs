@@ -10,9 +10,20 @@ public class FloorHazard : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
+        var boulder = collision.gameObject.GetComponent<Boulder>();
+        int wasCoveredUp = CoveredUp;
+        if(boulder != null && CoveredUp == 0)
+        {
+            CoveredUp++;
+            boulder.FallIntoHole(this);
+        }
         if (collision.gameObject.tag == "Platform")
         {
             CoveredUp++;
+        }
+        if(CoveredUp == 1 && wasCoveredUp == 0)
+        {
+            Navigation.RecalculateAll();
         }
     }
     protected virtual void OnTriggerExit2D(Collider2D collision)

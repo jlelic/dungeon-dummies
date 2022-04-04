@@ -40,9 +40,22 @@ public class Boulder : MonoBehaviour
         }
     }
 
+
+    public void FallIntoHole(FloorHazard hole)
+    {
+        StopBoulder();
+        iTween.MoveTo(gameObject, hole.transform.position, 0.4f);
+        iTween.ScaleTo(gameObject, 0.8f*Vector3.one, 0.4f);
+    }
+
     private void StopBoulder()
     {
         boulderStopped = true;
+        var colliders = GetComponents<Collider2D>();
+        foreach(var c in colliders)
+        {
+            c.enabled = false;
+        }
         GetComponent<Animator>().SetBool("isRolling", false);
         GetComponent<AudioSource>().Stop();
         GetComponent<AudioSource>().PlayOneShot(impactSFX);

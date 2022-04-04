@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] UIButton ButtonFast;
     [SerializeField] Text LevelEndText;
     [SerializeField] GameObject LevelEndAnimation;
+    [SerializeField] GameObject Borders;
 
 
     GridManager Grid;
@@ -38,6 +39,7 @@ public class UIManager : MonoBehaviour
         StopHighlight();
         Overlay.gameObject.SetActive(true);
         Overlay.color = Color.black;
+        Borders.SetActive(true);
     }
 
     private void Start()
@@ -163,8 +165,9 @@ public class UIManager : MonoBehaviour
     {
         InvokeAfterOverlay(0f, () =>
         {
-            Debug.Log(LevelEndAnimation.transform.position);
-            Debug.Log(LevelEndText.transform.position);
+            LevelEndAnimation.transform.parent.gameObject.SetActive(true);
+            LevelEndAnimation.SetActive(true);
+            LevelEndText.gameObject.SetActive(true);
 
             var animators = LevelEndAnimation.GetComponentsInChildren<Animator>();
             foreach (var a in animators)

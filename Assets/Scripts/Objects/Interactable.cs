@@ -14,7 +14,7 @@ public class Interactable : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (CanPlayerInteract)
+        if (CanPlayerInteract && !LevelManager.Instance.IsPlaying)
         {
             interactableRender.color = Color.yellow;
         }

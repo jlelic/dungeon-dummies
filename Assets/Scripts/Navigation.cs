@@ -155,8 +155,11 @@ public class Navigation : MonoBehaviour
     {
         if (IsWalking)
         {
-            IsWalking = false;
-            Navigate(navQueue.ToArray()[navQueue.Count - 1].coord, lastTolerance);
+            if(navQueue.Count != 0)
+            {
+                IsWalking = false;
+                Navigate(navQueue.ToArray()[navQueue.Count - 1].coord, lastTolerance);
+            }
         }
     }
 

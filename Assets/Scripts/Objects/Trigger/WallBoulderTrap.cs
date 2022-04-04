@@ -3,7 +3,7 @@ using UnityEngine;
 public class WallBoulderTrap : Triggerable
 {
     [SerializeField] Boulder boulderPrefab;
-
+    bool alreadyFired = false;
     private void Start()
     {
         CanPlayerInteract = false;
@@ -11,6 +11,11 @@ public class WallBoulderTrap : Triggerable
 
     public override void Trigger()
     {
+        if(alreadyFired)
+        {
+            return;
+        }
+        alreadyFired = true;
         GetComponent<AudioSource>().Play();
         Invoke("InstantiateBoulder", 0.25f);
     }
