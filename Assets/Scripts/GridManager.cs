@@ -253,6 +253,7 @@ public class GridManager : MonoBehaviour
         var id = tile.m_TileId;
         if (!TileInfo.ContainsKey((TileType)id))
         {
+            Debug.Log($"{layer} {coord.X} {coord.Y}");
             Debug.LogWarning("No tile info about tile ID " + id);
         }
         return (TileType)id;

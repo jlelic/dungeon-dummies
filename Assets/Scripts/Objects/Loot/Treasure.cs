@@ -11,7 +11,7 @@ public class Treasure : LootObject
         TimeToInteract = 200;
     }
 
-    public override void OnLoot()
+    public override void OnLoot(Adventurer adventurer)
     {
         if (objectToTrigger)
         {

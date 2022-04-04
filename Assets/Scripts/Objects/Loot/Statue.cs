@@ -10,7 +10,7 @@ public class Statue : LootObject
         Debug.Log(Coord);
     }
 
-    public override void OnLoot()
+    public override void OnLoot(Adventurer adventurer)
     {
         Destroy(light.gameObject);
         if (objectToTrigger)

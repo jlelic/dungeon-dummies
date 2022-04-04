@@ -27,11 +27,15 @@ public class Urn : LootObject
         }
     }
 
-    public override void OnLoot()
+    public override void OnLoot(Adventurer adventurer)
     {
         if (objectToTrigger)
         {
             objectToTrigger.Trigger();
+        }
+        if (!hazardCleared)
+        {
+            adventurer.Kill();
         }
     }
 }
