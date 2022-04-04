@@ -184,7 +184,7 @@ MonoBehaviour:
   - {x: -0.27466404, y: 0.015633583, z: 0}
   m_ShapePathHash: -958684427
   m_Mesh: {fileID: 0}
-  m_InstanceId: 61142
+  m_InstanceId: 82172
 --- !u!114 &4602907865330842200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,8 +197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c6dd898a2417a64f8ee7fd4ab419e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BurnParticleEffectPrefab: {fileID: 1915563807190241461, guid: e8fa68c3c298a6044bc38ec7454b3074, type: 3}
+  FallSound: {fileID: 8300000, guid: ba98d102b0768bf459f770eb961f2add, type: 3}
   progressBar: {fileID: 1741024528246582225}
+  State: 0
   emissionColor: {r: 2.9960785, g: 0.10980392, b: 2.3058825, a: 0}
 --- !u!82 &4570741342823045274
 AudioSource:

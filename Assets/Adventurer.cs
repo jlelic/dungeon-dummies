@@ -17,7 +17,7 @@ public class Adventurer : MonoBehaviour
     const float AI_UPDATE_TIME = 0.2f;
 
     private bool active = false;
-    [SerializeField] GameObject BurnParticleEffectPrefab;
+    [SerializeField] AudioClip FallSound;
     protected new SpriteRenderer renderer;
     protected Navigation navigation;
     protected Animator animator;
@@ -134,7 +134,6 @@ public class Adventurer : MonoBehaviour
         return CanSee(interest.Coord);
     }
 
-
     protected bool CanSee(TileCoord coord)
     {
         return grid.IsLos(transform.position, coord);
@@ -146,7 +145,8 @@ public class Adventurer : MonoBehaviour
         navigation.Stop();
         renderer.material = store.MaterialKilledBurn;
         Utils.tweenColor(renderer, Color.black, 0.2f);
-        Instantiate(BurnParticleEffectPrefab, transform.position, Quaternion.identity, transform);
+        Utils.PlayAudio(audioSource, store.SoundBurn, true);
+        Instantiate(store.BurnParticleEffect, transform.position, Quaternion.identity, transform);
         iTween.ValueTo(gameObject, iTween.Hash(
             //"delay", 0.3f,
             "time", 1.5f,
@@ -161,10 +161,12 @@ public class Adventurer : MonoBehaviour
     {
         active = false;
         navigation.Stop();
+        Utils.PlayAudio(audioSource, FallSound, true);
         if (spikes)
         {
             Utils.tweenColor(renderer, new Color(1, 0.2f, 0.2f), 0.8f);
         }
+        float targetScale = spikes ? 0.5f : 0f;
         iTween.MoveTo(gameObject, iTween.Hash(
             "position", holePosition,
             "time", 0.4f,
@@ -172,7 +174,7 @@ public class Adventurer : MonoBehaviour
             ));
         iTween.RotateAdd(gameObject, new Vector3(0, 0, UnityEngine.Random.Range(-60f, -85f)), 0.4f);
         iTween.ScaleTo(gameObject, iTween.Hash(
-            "scale", new Vector3(0.5f, 0.5f),
+            "scale", Vector3.one*targetScale,
             "time", 0.4f,
             "easetype", iTween.EaseType.easeOutQuad,
             "oncomplete", (Action)(() =>

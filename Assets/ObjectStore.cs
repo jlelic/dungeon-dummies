@@ -7,11 +7,13 @@ public class ObjectStore : MonoBehaviour
     [Header("Particle Effects")]
     [SerializeField] public GameObject BloodSquishParticleEffect;
     [SerializeField] public GameObject BloodSprayUpParticleEffect;
+    [SerializeField] public GameObject BurnParticleEffect;
     [Header("Materials")]
     [SerializeField] public Material MaterialKilledSquish;
     [SerializeField] public Material MaterialKilledBurn;
     [Header("Sounds")]
     [SerializeField] public AudioClip SoundSquish;
+    [SerializeField] public AudioClip SoundBurn;
 
     public static ObjectStore Instance;
 

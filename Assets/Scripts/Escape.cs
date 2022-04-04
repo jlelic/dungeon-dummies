@@ -22,6 +22,7 @@ public class Escape : Interest
         {
             LevelManager.Instance.OnAdventurerEscaped();
             var navigation = collision.GetComponent<Navigation>();
+            navigation.Stop();
             iTween.MoveTo(collision.gameObject, Grid.GetWorldPosFromTile(new TileCoord(coord.X + 2, coord.Y)), 5);
         }
     }
