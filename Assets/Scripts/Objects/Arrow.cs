@@ -4,9 +4,11 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     public float arrowSpeed;
+    TileCoord originalCoord;
 
     private void Start()
     {
+        originalCoord = GridManager.Instance.GetTileCoordFromWorld(transform.position);
         Destroy(gameObject, 10f);
     }
 
@@ -14,7 +16,7 @@ public class Arrow : MonoBehaviour
     {
         var grid = GridManager.Instance;
         var coord = grid.GetTileCoordFromWorld(transform.position);
-        if (grid.IsBlocking(coord))
+        if (!coord.Equals(originalCoord) && grid.IsBlocking(coord))
         {
             Destroy(gameObject);
         }
