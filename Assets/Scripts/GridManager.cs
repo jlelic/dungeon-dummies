@@ -90,7 +90,7 @@ public enum TileType
     WALL_S = 37,
     WALL_SE = 38,
     WALL_SE_OUTER = 39,
-    WALL_NW_OUTER = 41,
+    WALL_NW_OUTER = 40,
     WALL_SW_OUTER = 41,
     ANTIDOTE = 42,
 }
@@ -140,6 +140,10 @@ public class GridManager : MonoBehaviour
         {TileType.WALL_SW, new TileInfo{Blocking = true} },
         {TileType.WALL_S, new TileInfo{Blocking = true} },
         {TileType.WALL_SE, new TileInfo{Blocking = true} },
+        {TileType.WALL_NE_OUTER, new TileInfo{Blocking = true} },
+        {TileType.WALL_SE_OUTER, new TileInfo{Blocking = true} },
+        {TileType.WALL_NW_OUTER, new TileInfo{Blocking = true} },
+        {TileType.WALL_SW_OUTER, new TileInfo{Blocking = true} },
     };
 
     private int SizeX = 10;
