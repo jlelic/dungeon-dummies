@@ -85,9 +85,13 @@ public enum TileType
     GOAL = 31,
     WALL_W = 32,
     WALL_E = 34,
+    WALL_NE_OUTER = 35,
     WALL_SW = 36,
     WALL_S = 37,
     WALL_SE = 38,
+    WALL_SE_OUTER = 39,
+    WALL_NW_OUTER = 41,
+    WALL_SW_OUTER = 41,
     ANTIDOTE = 42,
 }
 
@@ -253,7 +257,6 @@ public class GridManager : MonoBehaviour
         var id = tile.m_TileId;
         if (!TileInfo.ContainsKey((TileType)id))
         {
-            Debug.Log($"{layer} {coord.X} {coord.Y}");
             Debug.LogWarning("No tile info about tile ID " + id);
         }
         return (TileType)id;
