@@ -61,7 +61,6 @@ public class LevelManager : MonoBehaviour
     {
         AdventurersRemaining--;
         SomeoneDied = true;
-        Debug.Log(AdventurersRemaining);
         if (AdventurersRemaining == 0)
         {
             UIManager.Instance.RestartLevel(3f);
