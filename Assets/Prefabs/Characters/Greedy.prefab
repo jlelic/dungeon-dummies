@@ -36,6 +36,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6024735094684826073}
+  - {fileID: 5372118394162385326}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -184,7 +185,7 @@ MonoBehaviour:
   - {x: -0.27466404, y: 0.015633583, z: 0}
   m_ShapePathHash: -958684427
   m_Mesh: {fileID: 0}
-  m_InstanceId: 41188
+  m_InstanceId: 52554
 --- !u!114 &2550957945751768017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BurnParticleEffectPrefab: {fileID: 1915563807190241461, guid: e8fa68c3c298a6044bc38ec7454b3074, type: 3}
   progressBar: {fileID: 435323199802664721}
+  State: 0
+  thinkBubble: {fileID: 5372118394162385327}
 --- !u!82 &104295753090762842
 AudioSource:
   m_ObjectHideFlags: 0
@@ -295,6 +298,79 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1001 &655501104239764891
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1123353071743322255}
+    m_Modifications:
+    - target: {fileID: 4869895326870434869, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869895326870434869, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869895326870434869, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869895326870434869, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869895326870434869, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869895326870434869, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869895326870434869, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869895326870434869, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869895326870434869, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869895326870434869, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869895326870434869, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869895326870434870, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+      propertyPath: m_Name
+      value: ThinkBubble
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+--- !u!4 &5372118394162385326 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4869895326870434869, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+  m_PrefabInstance: {fileID: 655501104239764891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5372118394162385327 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4869895326870434868, guid: b0664a14c57265a4195c4144d5d889aa, type: 3}
+  m_PrefabInstance: {fileID: 655501104239764891}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b630a4a56ccc24a99071e11908f8b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8255871480175305095
 PrefabInstance:
   m_ObjectHideFlags: 0

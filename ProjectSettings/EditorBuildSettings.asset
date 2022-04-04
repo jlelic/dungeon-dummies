@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 25497ab710793304ba62d9f7af5f00b5
+  - enabled: 1
+    path: Assets/Scenes/Levels/1.unity
+    guid: dc140067fddadd2499a289d42e46bb6b
+  - enabled: 1
+    path: Assets/Scenes/Levels/2.unity
+    guid: 172292ffbfe46d541a6f12f37dac7b80
+  - enabled: 1
     path: Assets/Scenes/JopkovSvet.unity
     guid: 3c82384f1bc60ac4390b8fcbd511e634
   - enabled: 0

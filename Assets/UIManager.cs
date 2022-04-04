@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -120,6 +121,11 @@ public class UIManager : MonoBehaviour
         RestartLevel();
     }
 
+    void OverlayScreen(float delay, Action callback)
+    {
+
+    }
+
     public void RestartLevel(float delay = 0)
     {
         var lights = FindObjectsOfType<Light2D>();
@@ -150,6 +156,6 @@ public class UIManager : MonoBehaviour
 
     public void ShowGoodJobScreen()
     {
-        Debug.Log("Good Job");
+
     }
 }
