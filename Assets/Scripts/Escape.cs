@@ -6,9 +6,11 @@ public class Escape : Interest
 {
     TileCoord coord;
     GridManager Grid;
+    HashSet<string> escaped;
     // Start is called before the first frame update
     void Start()
     {
+        escaped = new HashSet<string>();
         InteractableDistance = 0;
         Grid = GridManager.Instance;
         coord = Grid.GetTileCoordFromWorld(transform.position);
@@ -20,6 +22,12 @@ public class Escape : Interest
     {
         if (collision.gameObject.tag == "Adventurer")
         {
+            var name = collision.gameObject.name;
+            if(escaped.Contains(name))
+            {
+                return;
+            }
+            escaped.Add(name);
             LevelManager.Instance.OnAdventurerEscaped();
             var navigation = collision.GetComponent<Navigation>();
             navigation.Stop();
