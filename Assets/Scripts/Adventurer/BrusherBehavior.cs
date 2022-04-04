@@ -15,14 +15,10 @@ public class BrusherBehavior : Adventurer
 
     public override void PierceByArrow()
     {
-        navigation.Stop();
-        StartCoroutine(Blocking());
 
     }
     public override void Kill()
     {
-        navigation.Stop();
-        StartCoroutine(Blocking());
     }
 
 
