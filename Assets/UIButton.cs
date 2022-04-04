@@ -15,7 +15,6 @@ public class UIButton : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("START " + gameObject.name);
         originalPosition = transform.position;
         renderer = GetComponent<SpriteRenderer>();
         spriteOriginal = renderer.sprite;

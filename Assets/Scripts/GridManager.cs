@@ -77,7 +77,15 @@ public enum TileType
     WALL_FIRE_TRAP = 17,
     WALL_FIRE_TRAP_2 = 18,
     SPIKES_BLOODY = 22,
+    WALL_NW = 28,
+    WALL_N = 29,
+    WALL_NE = 30,
     GOAL = 31,
+    WALL_W = 32,
+    WALL_E = 34,
+    WALL_SW = 36,
+    WALL_S = 37,
+    WALL_SE = 38,
 
 }
 
@@ -103,6 +111,14 @@ public class GridManager : MonoBehaviour
         {TileType.WALL, new TileInfo{Blocking = true} },
         {TileType.WALL_FIRE_TRAP, new TileInfo{Blocking = true} },
         {TileType.WALL_FIRE_TRAP_2, new TileInfo{Blocking = true} },
+        {TileType.WALL_NW, new TileInfo{Blocking = true} },
+        {TileType.WALL_N, new TileInfo{Blocking = true} },
+        {TileType.WALL_NE, new TileInfo{Blocking = true} },
+        {TileType.WALL_W, new TileInfo{Blocking = true} },
+        {TileType.WALL_E, new TileInfo{Blocking = true} },
+        {TileType.WALL_SW, new TileInfo{Blocking = true} },
+        {TileType.WALL_S, new TileInfo{Blocking = true} },
+        {TileType.WALL_SE, new TileInfo{Blocking = true} },
     };
 
 
@@ -272,6 +288,11 @@ public class GridManager : MonoBehaviour
 
     public bool IsBlocking(TileCoord t)
     {
+        if (!IsInBounds(t))
+        {
+            return true;
+        }
+
         var wallTile = GetTile(t, TileLayer.WALL);
         if (TileInfo.ContainsKey(wallTile) && TileInfo[wallTile].Blocking)
         {
@@ -282,8 +303,48 @@ public class GridManager : MonoBehaviour
         {
             return true;
         }
-
         return false;
+    }
+
+    public bool IsInBounds(TileCoord t)
+    {
+        return t.X > -10 && t.X < 20 && t.Y >= 0 && t.Y < 10;
+    }
+
+    public bool IsLos(TileCoord from, TileCoord to)
+    {
+        return IsLos(GetWorldPosFromTile(from), GetWorldPosFromTile(to));
+    }
+
+    public bool IsLos(Vector3 from, TileCoord to)
+    {
+        return IsLos(from, GetWorldPosFromTile(to));
+    }
+
+
+    public bool IsLos(Vector3 from, Vector3 to)
+    {
+        var diffX = to.x - from.x;
+        var diffY = to.y - from.y;
+        Vector3 diff = new Vector3(diffX, diffY,0).normalized*0.1f;
+        var targetCoord = GetTileCoordFromWorld(to);
+        var vector = from;
+        var coord = GetTileCoordFromWorld(from);
+        while(!coord.Equals(targetCoord))
+        {
+            vector += diff;
+            coord = GetTileCoordFromWorld(vector);
+            if(coord.Equals(targetCoord))
+            {
+                return true;
+            }
+            if(IsBlocking(coord))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public float GetDangerCost(TileCoord t)
@@ -316,11 +377,11 @@ public class GridManager : MonoBehaviour
                 }
                 int nX = f.X + i;
                 int nY = f.Y + j;
-                if (nX < -10 || nY < 0 || nX > 20 || nY >= 10)
+                var nCoord = new TileCoord(nX, nY);
+                if (!IsInBounds(nCoord))
                 {
                     continue;
                 }
-                var nCoord = new TileCoord(nX, nY);
                 if (IsBlocking(nCoord))
                 {
                     continue;

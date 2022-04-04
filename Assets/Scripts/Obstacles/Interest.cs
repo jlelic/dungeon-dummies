@@ -15,4 +15,13 @@ public abstract class Interest : MonoBehaviour
 
     public abstract void Interact(Adventurer adventurer);
 
+    public virtual Sprite GetIcon()
+    {
+        var renderer = GetComponent<SpriteRenderer>();
+        if(renderer == null)
+        {
+            return null;
+        }
+        return renderer.sprite;
+    }
 }

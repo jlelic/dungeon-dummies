@@ -6,6 +6,7 @@ public enum AdventurerState
 {
     Idle,
     Moving,
+    Leaving,
     Interacting,
     Attacking,
     Thinking
@@ -13,6 +14,8 @@ public enum AdventurerState
 
 public class Adventurer : MonoBehaviour
 {
+    const float AI_UPDATE_TIME = 0.2f;
+
     private bool active = false;
     [SerializeField] GameObject BurnParticleEffectPrefab;
     protected new SpriteRenderer renderer;
@@ -23,8 +26,10 @@ public class Adventurer : MonoBehaviour
     protected GridManager grid;
 
     [SerializeField] ProgressBar progressBar;
-    protected AdventurerState State;
+    [SerializeField] protected AdventurerState State;
     Interest CurrentInterest;
+
+    private float sinceLastAiUpdate;
 
 
     protected virtual void Start()
@@ -47,6 +52,11 @@ public class Adventurer : MonoBehaviour
     protected virtual Interest GetNextInterest()
     {
         return LevelManager.Instance.Escape;
+    }
+
+    protected virtual void AIUpdate()
+    {
+
     }
 
     protected virtual void OnInterestedInteracted(Interest interest)
@@ -77,15 +87,16 @@ public class Adventurer : MonoBehaviour
                     }
                     else
                     {
-                        if(CurrentInterest is Escape)
+                        if (CurrentInterest is Escape)
                         {
                             navigation.ForceNavigate(CurrentInterest);
+                            State = AdventurerState.Leaving;
                         }
                         else
                         {
                             navigation.Navigate(CurrentInterest);
+                            State = AdventurerState.Moving;
                         }
-                        State = AdventurerState.Moving;
                     }
                 }
                 break;
@@ -102,9 +113,32 @@ public class Adventurer : MonoBehaviour
                     }
                 }
                 break;
+            case AdventurerState.Leaving:
+                if(!navigation.IsWalking)
+                {
+                    State = AdventurerState.Idle;
+                }
+                break;
         }
+        sinceLastAiUpdate += Time.deltaTime;
+        if(sinceLastAiUpdate > AI_UPDATE_TIME)
+        {
+            sinceLastAiUpdate = 0;
+            AIUpdate();
+        }
+        
     }
 
+    protected bool CanSee(Interest interest)
+    {
+        return CanSee(interest.Coord);
+    }
+
+
+    protected bool CanSee(TileCoord coord)
+    {
+        return grid.IsLos(transform.position, coord);
+    }
 
     public void Burn()
     {
@@ -127,7 +161,7 @@ public class Adventurer : MonoBehaviour
     {
         active = false;
         navigation.Stop();
-        if(spikes)
+        if (spikes)
         {
             Utils.tweenColor(renderer, new Color(1, 0.2f, 0.2f), 0.8f);
         }
@@ -136,7 +170,7 @@ public class Adventurer : MonoBehaviour
             "time", 0.4f,
             "easetype", iTween.EaseType.easeOutQuad
             ));
-        iTween.RotateAdd(gameObject, new Vector3(0, 0, UnityEngine.Random.Range(-60f,-85f)), 0.4f);
+        iTween.RotateAdd(gameObject, new Vector3(0, 0, UnityEngine.Random.Range(-60f, -85f)), 0.4f);
         iTween.ScaleTo(gameObject, iTween.Hash(
             "scale", new Vector3(0.5f, 0.5f),
             "time", 0.4f,
