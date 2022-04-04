@@ -23,7 +23,7 @@ public class Lava : FloorHazard
         base.OnTriggerEnter2D(collision);
 
         light.enabled = !IsCovered;
-        if(IsCovered)
+        if (IsCovered)
         {
             return;
         }
@@ -55,7 +55,6 @@ public class Lava : FloorHazard
                 "onupdate", onLightUpdate
                 ));
         }
-        Debug.Log(collision.gameObject.tag);
     }
 
 

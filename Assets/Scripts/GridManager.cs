@@ -365,7 +365,7 @@ public class GridManager : MonoBehaviour
     {
         var groundTile = GetTile(t, TileLayer.GROUND);
         var isPlatform = TileInfo[GetTile(t, TileLayer.OBJECT)].Platform;
-        if ((groundTile == TileType.LAVA || groundTile == TileType.SPIKES || groundTile == TileType.PIT) && !isPlatform)
+        if ((groundTile == TileType.LAVA || groundTile == TileType.SPIKES || groundTile == TileType.SPIKES_BLOODY || groundTile == TileType.PIT) && !isPlatform)
         {
             return 50;
         }

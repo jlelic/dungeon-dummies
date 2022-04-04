@@ -15,7 +15,7 @@ public class Spikes : FloorHazard
         var adventurer = collision.gameObject.GetComponent<Adventurer>();
         if (adventurer != null)
         {
-            adventurer.FallToSpike(transform.position, true);
+            adventurer.Fall(transform.position, true);
         }
     }
 

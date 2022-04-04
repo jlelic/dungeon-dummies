@@ -70,11 +70,10 @@ public class Draggable : MonoBehaviour
             return;
         }
         UIManager.Instance.StopHighlight();
-        Debug.Log("STOP DRAG");
         iTween.Stop(gameObject);
         dragging = false;
         var targetTileCoord = isValidPlacement ? newTileCoord : TileCoord;
-        if(isValidPlacement)
+        if (isValidPlacement)
         {
             TileCoord = newTileCoord;
         }
@@ -84,24 +83,7 @@ public class Draggable : MonoBehaviour
         iTween.MoveTo(gameObject, iTween.Hash(
             "position", Shadow.GetShadowPosition(),
             "time", 0.2f,
-            "oncomplete",(Action)(() => { GridManager.Instance.SetTile(TileCoord, TileLayer, TileType); Navigation.RecalculateAll(); })
+            "oncomplete", (Action)(() => { GridManager.Instance.SetTile(TileCoord, TileLayer, TileType); Navigation.RecalculateAll(); })
         ));
     }
-
-    void OnMouseEnter()
-    {
-    }
-
-    void OnMouseOver()
-    {
-        //If your mouse hovers over the GameObject with the script attached, output this message
-        //Debug.Log("Mouse is over GameObject.");
-    }
-
-    void OnMouseExit()
-    {
-        //The mouse is no longer hovering over the GameObject so output this message each frame
-        Debug.Log("Mouse is no longer on GameObject.");
-    }
-
 }

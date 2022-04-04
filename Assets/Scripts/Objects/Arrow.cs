@@ -18,5 +18,9 @@ public class Arrow : MonoBehaviour
             adventurer.PierceByArrow();
             Destroy(gameObject);
         }
+        if (other.gameObject.tag == "Platform")
+        {
+            Destroy(gameObject);
+        }
     }
 }

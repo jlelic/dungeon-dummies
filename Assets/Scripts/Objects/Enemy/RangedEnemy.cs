@@ -12,7 +12,7 @@ public class RangedEnemy : Enemy
     private void Shoot()
     {
         GetComponent<AudioSource>().Play();
-        Arrow arrow = Instantiate<Arrow>(arrowPrefab, transform.position, Quaternion.identity, transform);
+        Arrow arrow = Instantiate<Arrow>(arrowPrefab, transform.position, Quaternion.Euler(0f, 0f, facing == FACING_DIRECTION.LEFT ? 180f : 0f), transform);
         arrow.GetComponent<Rigidbody2D>().velocity = GetFireDirection().normalized * arrow.arrowSpeed;
     }
 
@@ -20,7 +20,7 @@ public class RangedEnemy : Enemy
     {
         if (canShoot && active)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 100f, LayerMask.GetMask("Adventurer"));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, facing == FACING_DIRECTION.LEFT ? Vector2.left : Vector2.right, 100f, LayerMask.GetMask("Adventurer"));
             if (hit.collider != null)
             {
                 Adventurer adventurer = hit.transform.gameObject.GetComponent<Adventurer>();

@@ -13,7 +13,7 @@ public class Pit : FloorHazard
         var adventurer = collision.gameObject.GetComponent<Adventurer>();
         if (adventurer != null)
         {
-            adventurer.FallToPit();
+            adventurer.Fall(transform.position, false);
         }
     }
 

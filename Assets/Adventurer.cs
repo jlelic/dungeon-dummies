@@ -157,7 +157,7 @@ public class Adventurer : MonoBehaviour
             ));
     }
 
-    public void FallToSpike(Vector3 holePosition, bool spikes)
+    public void Fall(Vector3 holePosition, bool spikes)
     {
         active = false;
         navigation.Stop();
@@ -185,14 +185,6 @@ public class Adventurer : MonoBehaviour
                 OnDeath();
             })
             ));
-    }
-
-    public void FallToPit()
-    {
-        active = false;
-        navigation.Stop();
-        OnDeath();
-        Destroy(gameObject);
     }
 
     public void Squish()

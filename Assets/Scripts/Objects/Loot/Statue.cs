@@ -5,11 +5,6 @@ public class Statue : LootObject
 {
     [SerializeField] new Light2D light;
 
-    private void Start()
-    {
-        Debug.Log(Coord);
-    }
-
     public override void OnLoot(Adventurer adventurer)
     {
         Destroy(light.gameObject);
