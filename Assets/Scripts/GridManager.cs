@@ -14,7 +14,7 @@ public struct TileCoord
 
     public float Distance(TileCoord from)
     {
-        return Mathf.Sqrt((X-from.X)* (X - from.X) + (Y - from.Y) * (Y - from.Y));
+        return Mathf.Sqrt((X - from.X) * (X - from.X) + (Y - from.Y) * (Y - from.Y));
     }
 
     public override string ToString()
@@ -73,6 +73,8 @@ public enum TileType
     STATUE = 11,
     PRESSURE_PLATE = 12,
     LEVER = 13,
+    BUTTON = 14,
+    WALL_ARROW_TRAP = 15,
     BOULDER_HOLE = 16,
     WALL_FIRE_TRAP = 17,
     WALL_FIRE_TRAP_2 = 18,
@@ -96,21 +98,36 @@ public class GridManager : MonoBehaviour
 
     static public Dictionary<TileType, TileInfo> TileInfo = new Dictionary<TileType, TileInfo>()
     {
-        {TileType.BOULDER_HOLE, new TileInfo{Blocking = true} },
-        {TileType.BRIDGE, new TileInfo{Platform = true} },
+        // BASIC
         {TileType.EMPTY, new TileInfo{} },
         {TileType.GOAL, new TileInfo{} },
         {TileType.GROUND, new TileInfo{} },
+        // DRAGGABLE
+        {TileType.BRIDGE, new TileInfo{Platform = true} },
+        {TileType.PILLAR, new TileInfo{Blocking = true} },
+        // FLOOR HAZARDS
         {TileType.SPIKES, new TileInfo{Cost = 50 } },
         {TileType.SPIKES_BLOODY, new TileInfo{Cost = 50 } },
         {TileType.LAVA, new TileInfo{Burning = true, Cost = 50 } },
+        {TileType.PIT, new TileInfo{Cost = 50 } },
+        // TRIGGERS
         {TileType.LEVER, new TileInfo{Blocking = true} },
-        {TileType.PILLAR, new TileInfo{Blocking = true} },
+        {TileType.BUTTON, new TileInfo{Blocking = true} },
+        {TileType.PRESSURE_PLATE, new TileInfo{} },
+        // LOOT
+        {TileType.CHEST, new TileInfo{} },
         {TileType.STATUE, new TileInfo{Blocking = true} },
         {TileType.URN, new TileInfo{} },
-        {TileType.WALL, new TileInfo{Blocking = true} },
+        // Enemy
+        {TileType.ENEMY_RANGED, new TileInfo {}},
+        {TileType.ENEMY_MELEE, new TileInfo {}},
+        // TRAPS
+        {TileType.WALL_ARROW_TRAP, new TileInfo{Blocking = true} },
         {TileType.WALL_FIRE_TRAP, new TileInfo{Blocking = true} },
         {TileType.WALL_FIRE_TRAP_2, new TileInfo{Blocking = true} },
+        {TileType.BOULDER_HOLE, new TileInfo{Blocking = true} },
+        // WALLS
+        {TileType.WALL, new TileInfo{Blocking = true} },
         {TileType.WALL_NW, new TileInfo{Blocking = true} },
         {TileType.WALL_N, new TileInfo{Blocking = true} },
         {TileType.WALL_NE, new TileInfo{Blocking = true} },
@@ -121,8 +138,6 @@ public class GridManager : MonoBehaviour
         {TileType.WALL_SE, new TileInfo{Blocking = true} },
     };
 
-
-    public TileBase lol;
     private int SizeX = 10;
     private int SizeY = 10;
 
@@ -139,7 +154,6 @@ public class GridManager : MonoBehaviour
     [SerializeField]
     TileObjectPrefab[] TileObjectPrefabs;
 
-    // Start is called before the first frame update
     void Awake()
     {
         if (Instance == null)
@@ -171,7 +185,6 @@ public class GridManager : MonoBehaviour
             else if (name == "bridge" || name == "interactable")
             {
                 layer = TileLayer.OBJECT;
-
             }
             else if (name == "ground")
             {
@@ -238,7 +251,7 @@ public class GridManager : MonoBehaviour
             return TileType.EMPTY;
         }
         var id = tile.m_TileId;
-        if(!TileInfo.ContainsKey((TileType)id))
+        if (!TileInfo.ContainsKey((TileType)id))
         {
             Debug.LogWarning("No tile info about tile ID " + id);
         }
@@ -326,19 +339,19 @@ public class GridManager : MonoBehaviour
     {
         var diffX = to.x - from.x;
         var diffY = to.y - from.y;
-        Vector3 diff = new Vector3(diffX, diffY,0).normalized*0.1f;
+        Vector3 diff = new Vector3(diffX, diffY, 0).normalized * 0.1f;
         var targetCoord = GetTileCoordFromWorld(to);
         var vector = from;
         var coord = GetTileCoordFromWorld(from);
-        while(!coord.Equals(targetCoord))
+        while (!coord.Equals(targetCoord))
         {
             vector += diff;
             coord = GetTileCoordFromWorld(vector);
-            if(coord.Equals(targetCoord))
+            if (coord.Equals(targetCoord))
             {
                 return true;
             }
-            if(IsBlocking(coord))
+            if (IsBlocking(coord))
             {
                 return false;
             }

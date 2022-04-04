@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -40,12 +38,13 @@ public class LevelManager : MonoBehaviour
     public void OnAdventurerEscaped()
     {
         AdventurersRemaining--;
-        if(AdventurersRemaining == 0)
+        if (AdventurersRemaining == 0)
         {
-            if(SomeoneDied)
+            if (SomeoneDied)
             {
                 UIManager.Instance.RestartLevel();
-            } else
+            }
+            else
             {
                 UIManager.Instance.ShowGoodJobScreen();
             }
@@ -57,7 +56,7 @@ public class LevelManager : MonoBehaviour
     {
         AdventurersRemaining--;
         SomeoneDied = true;
-        if(AdventurersRemaining == 0)
+        if (AdventurersRemaining == 0)
         {
             UIManager.Instance.RestartLevel(3f);
         }
@@ -68,9 +67,14 @@ public class LevelManager : MonoBehaviour
     {
         IsPlaying = true;
         var adventurers = FindObjectsOfType<Adventurer>();
-        foreach(var a in adventurers)
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        foreach (var a in adventurers)
         {
             a.Activate();
+        }
+        foreach (Enemy e in enemies)
+        {
+            e.Activate();
         }
         MusicMixer.instance.QueueHigh();
     }

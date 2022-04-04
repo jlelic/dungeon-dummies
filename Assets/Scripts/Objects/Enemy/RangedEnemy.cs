@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class RangedEnemy : Enemy
@@ -5,8 +6,9 @@ public class RangedEnemy : Enemy
     [SerializeField] Arrow arrowPrefab;
     [SerializeField] GameObject arrowSpawnPoint;
 
-    private bool didShoot = false;
+    private bool canShoot = true;
 
+    // Called by Shoot Animation event 
     private void Shoot()
     {
         GetComponent<AudioSource>().Play();
@@ -16,7 +18,7 @@ public class RangedEnemy : Enemy
 
     private void Update()
     {
-        if (!didShoot)
+        if (canShoot && active)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 100f, LayerMask.GetMask("Adventurer"));
             if (hit.collider != null)
@@ -24,12 +26,19 @@ public class RangedEnemy : Enemy
                 Adventurer adventurer = hit.transform.gameObject.GetComponent<Adventurer>();
                 if (adventurer != null)
                 {
-                    didShoot = true;
                     GetComponent<Animator>().SetTrigger("Shoot");
+                    canShoot = false;
+                    StartCoroutine(ShootDelay());
                 }
 
             }
         }
+    }
+
+    private IEnumerator ShootDelay()
+    {
+        yield return new WaitForSeconds(2.5f);
+        canShoot = true;
     }
 
     private Vector2 GetFireDirection()

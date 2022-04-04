@@ -114,19 +114,19 @@ public class Adventurer : MonoBehaviour
                 }
                 break;
             case AdventurerState.Leaving:
-                if(!navigation.IsWalking)
+                if (!navigation.IsWalking)
                 {
                     State = AdventurerState.Idle;
                 }
                 break;
         }
         sinceLastAiUpdate += Time.deltaTime;
-        if(sinceLastAiUpdate > AI_UPDATE_TIME)
+        if (sinceLastAiUpdate > AI_UPDATE_TIME)
         {
             sinceLastAiUpdate = 0;
             AIUpdate();
         }
-        
+
     }
 
     protected bool CanSee(Interest interest)
@@ -157,7 +157,7 @@ public class Adventurer : MonoBehaviour
             ));
     }
 
-    public void Fall(Vector3 holePosition, bool spikes)
+    public void FallToSpike(Vector3 holePosition, bool spikes)
     {
         active = false;
         navigation.Stop();
@@ -185,6 +185,14 @@ public class Adventurer : MonoBehaviour
                 OnDeath();
             })
             ));
+    }
+
+    public void FallToPit()
+    {
+        active = false;
+        navigation.Stop();
+        OnDeath();
+        Destroy(gameObject);
     }
 
     public void Squish()
