@@ -9,7 +9,7 @@ public enum TRIGGER_DIRECTION
 }
 
 [RequireComponent(typeof(AudioSource)), RequireComponent(typeof(SpriteRenderer))]
-public abstract class Triggerable : MonoBehaviour
+public abstract class Triggerable : Interactable
 {
     public TRIGGER_DIRECTION direction;
 

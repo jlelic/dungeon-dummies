@@ -5,6 +5,11 @@ public class WallArrowTrap : Triggerable
 
     [SerializeField] Arrow arrowPrefab;
 
+    private void Start()
+    {
+        CanPlayerInteract = false;
+    }
+
     public override void Trigger()
     {
         GetComponent<AudioSource>().Play();

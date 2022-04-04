@@ -219,8 +219,19 @@ public class Adventurer : MonoBehaviour
     {
         active = false;
         navigation.Stop();
-        OnDeath();
-        Destroy(gameObject);
+        Utils.PlayAudio(audioSource, store.SoundSquish, true);
+        Utils.tweenColor(renderer, new Color(1, 0.5f, 0.5f), 1.2f);
+        Instantiate(ObjectStore.Instance.BloodSprayUpParticleEffect, transform.position, Quaternion.identity, transform);
+        iTween.RotateAdd(gameObject, new Vector3(0, 0, UnityEngine.Random.Range(80, 100f)), 0.3f);
+        iTween.ScaleTo(gameObject, iTween.Hash(
+            "scale", new Vector3(0.7f, 1, 1),
+            "time", 0.4f,
+            "easetype", iTween.EaseType.easeOutQuad,
+            "oncomplete", (Action)(() =>
+            {
+                OnDeath();
+            })
+            ));
     }
 
     void OnDeath()

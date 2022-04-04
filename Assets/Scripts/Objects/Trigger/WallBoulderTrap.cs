@@ -4,6 +4,11 @@ public class WallBoulderTrap : Triggerable
 {
     [SerializeField] Boulder boulderPrefab;
 
+    private void Start()
+    {
+        CanPlayerInteract = false;
+    }
+
     public override void Trigger()
     {
         GetComponent<AudioSource>().Play();
