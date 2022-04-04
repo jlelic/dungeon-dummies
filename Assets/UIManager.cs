@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] UIButton ButtonRestart;
     [SerializeField] UIButton ButtonPlay;
     [SerializeField] UIButton ButtonFast;
+    [SerializeField] Text LevelEndText;
+    [SerializeField] GameObject LevelEndAnimation;
+
 
     GridManager Grid;
     LevelManager LevelManager;
@@ -121,17 +125,13 @@ public class UIManager : MonoBehaviour
         RestartLevel();
     }
 
-    void OverlayScreen(float delay, Action callback)
-    {
-
-    }
-
-    public void RestartLevel(float delay = 0)
+    void InvokeAfterOverlay(float delay, Action callback)
     {
         var lights = FindObjectsOfType<Light2D>();
-        foreach(var light in lights)
+        foreach (var light in lights)
         {
-            if(light.lightType == Light2D.LightType.Global) {
+            if (light.lightType == Light2D.LightType.Global)
+            {
                 continue;
             }
             iTween.ValueTo(light.gameObject, iTween.Hash(
@@ -144,7 +144,12 @@ public class UIManager : MonoBehaviour
         }
         Overlay.gameObject.SetActive(true);
         Overlay.color = Color.clear;
-        Utils.tweenColor(Overlay, Color.black, 0.8f, 0.2f + delay, ignoreTimeScale: true, callback: LevelManager.RestartLevel);
+        Utils.tweenColor(Overlay, Color.black, 0.8f, 0.2f + delay, ignoreTimeScale: true, callback: callback);
+    }
+
+    public void RestartLevel(float delay = 0)
+    {
+        InvokeAfterOverlay(delay, LevelManager.RestartLevel);
     }
 
     void UncoverOverlay()
@@ -154,8 +159,73 @@ public class UIManager : MonoBehaviour
         Utils.tweenColor(Overlay, Color.clear, 1.5f, ignoreTimeScale: true);
     }
 
-    public void ShowGoodJobScreen()
+    public void ShowGoodJobScreen(int numLevel)
     {
+        InvokeAfterOverlay(0f, () =>
+        {
+            Debug.Log(LevelEndAnimation.transform.position);
+            Debug.Log(LevelEndText.transform.position);
 
+            var animators = LevelEndAnimation.GetComponentsInChildren<Animator>();
+            foreach (var a in animators)
+            {
+                a.SetBool("Walking", true);
+            }
+
+            var easeType = iTween.EaseType.easeOutCubic;
+            var timeTransitions = 0.8f;
+            var timeMain = 3.5f;
+            var animPos = LevelEndAnimation.transform.position;
+            var textPos = LevelEndText.transform.position;
+            iTween.MoveTo(LevelEndAnimation, iTween.Hash(
+                "position", new Vector3(0, animPos.y),
+                "time", timeTransitions,
+                "easetype", easeType,
+                "ignoretimescale", true
+                ));
+            LevelEndText.text = "Room " + numLevel + " passed";
+            iTween.MoveTo(LevelEndText.gameObject, iTween.Hash(
+                "position", new Vector3(0, textPos.y),
+                "time", timeTransitions,
+                "easetype", easeType,
+                "ignoretimescale", true
+                ));
+
+            iTween.MoveTo(LevelEndAnimation, iTween.Hash(
+                "position", new Vector3(4, animPos.y),
+                "time", timeMain,
+                "easetype", iTween.EaseType.linear,
+                "ignoretimescale", true,
+                "delay", timeTransitions
+                ));
+            iTween.MoveTo(LevelEndText.gameObject, iTween.Hash(
+                "position", new Vector3(-4, textPos.y),
+                "time", timeMain,
+                "easetype", iTween.EaseType.linear,
+                "ignoretimescale", true,
+                "delay", timeTransitions, // I HATE MY LIFE
+                "oncomplete", (Action)(() =>
+                {
+                    iTween.MoveBy(LevelEndAnimation, iTween.Hash(
+                        "amount", Vector3.right * 20,
+                        "time", timeTransitions,
+                        "easetype", easeType,
+                        "ignoretimescale", true
+                        ));
+                    iTween.MoveBy(LevelEndText.gameObject, iTween.Hash(
+                        "amount", Vector3.left * 20,
+                        "time", timeTransitions,
+                        "easetype", easeType,
+                        "ignoretimescale", true,
+                        "oncomplete", ((Action)(() => { LevelManager.LoadLevel(numLevel + 1); }))
+                        ));
+                })
+                ));
+
+
+
+
+            //                "oncomplete", ((Action)(() => { LevelManager.LoadLevel(numLevel + 1); }))
+        });
     }
 }

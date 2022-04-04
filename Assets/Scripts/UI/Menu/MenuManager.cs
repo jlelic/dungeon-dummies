@@ -25,11 +25,10 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         Overlay.gameObject.SetActive(false);
-        var adventurers = GameObject.FindGameObjectsWithTag ("Adventurer");
-        foreach(var a in adventurers)
+        var animators = GameObject.FindObjectsOfType<Animator>();
+        foreach(var a in animators)
         {
-            var animator = a.GetComponent<Animator>();
-            animator.SetBool("Walking", true);
+            a.SetBool("Walking", true);
         }
 
         int maxLevel = PlayerPrefs.GetInt("maxLevel", 1);

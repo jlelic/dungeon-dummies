@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/2.unity
     guid: 172292ffbfe46d541a6f12f37dac7b80
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/JopkovSvet.unity
     guid: 3c82384f1bc60ac4390b8fcbd511e634
   - enabled: 0

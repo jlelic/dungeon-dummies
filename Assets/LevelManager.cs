@@ -48,7 +48,10 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
-                UIManager.Instance.ShowGoodJobScreen();
+                int levelId = SceneManager.GetActiveScene().buildIndex;
+                Time.timeScale = 1;
+                PlayerPrefs.SetInt("maxLevel", levelId + 1);
+                UIManager.Instance.ShowGoodJobScreen(levelId);
             }
         }
         MusicMixer.instance.QueueEnd();
@@ -58,6 +61,7 @@ public class LevelManager : MonoBehaviour
     {
         AdventurersRemaining--;
         SomeoneDied = true;
+        Debug.Log(AdventurersRemaining);
         if (AdventurersRemaining == 0)
         {
             UIManager.Instance.RestartLevel(3f);
