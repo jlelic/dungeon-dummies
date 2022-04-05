@@ -98,7 +98,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e562df75f00114546aa7cbd1420e38d5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -223,6 +223,7 @@ MonoBehaviour:
   direction: 2
   firePrefab: {fileID: 3293908056631276943, guid: b797475425ca92449ae349baeb28e618, type: 3}
   disabledState: {fileID: 21300000, guid: cf4edbe92a0903141939468b5e66ac7d, type: 3}
+  trapEnabled: 0
 --- !u!95 &5560488366193816950
 Animator:
   serializedVersion: 3
