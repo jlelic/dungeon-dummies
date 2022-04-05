@@ -47,6 +47,19 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+
+    private void Update()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+        }
+    }
+
+
     public void LoadLevel(int levelNum)
     {
         Overlay.gameObject.SetActive(true);

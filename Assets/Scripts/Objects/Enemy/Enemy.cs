@@ -24,7 +24,8 @@ public abstract class Enemy : MonoBehaviour
     {
         GridManager grid = GridManager.Instance;
         TileCoord coord = grid.GetTileCoordFromWorld(transform.position);
-        GridManager.Instance.ClearTile(coord, TileLayer.OBJECT);
+        grid.ClearTile(coord, TileLayer.OBJECT);
+        grid.SetEnemyTile(coord);
     }
 
     public void Activate()

@@ -13,16 +13,25 @@ public class LevelButton : MonoBehaviour
 
     private void Start()
     {
+
         text = GetComponent<Text>();
         originalColor = text.color;
-        if(Level == 0)
+        if (Level == 0)
         {
             Level = PlayerPrefs.GetInt("maxLevel", 1);
-            if(Level > 1)
+            if (Level > 1)
             {
                 text.text = "Continue";
             }
-        } else
+        }
+        else if (Level == -1)
+        {
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+            {
+                Destroy(gameObject);
+            }
+        }
+        else
         {
             text.text = "Level " + Level;
         }
@@ -40,13 +49,21 @@ public class LevelButton : MonoBehaviour
 
     public void OnMouseClick()
     {
+        if (Level == -1)
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+            Application.Quit();
+            return;
+        }
         StartCoroutine(BlinkAndSelectLevel());
     }
 
     public void SetLevelNumber(int level)
     {
         Level = level;
-        if(text != null)
+        if (text != null)
         {
             text.text = "Level " + level;
         }

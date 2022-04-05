@@ -152,6 +152,7 @@ public class GridManager : MonoBehaviour
     Dictionary<TileType, TileBase> Tilebases = new Dictionary<TileType, TileBase>();
     Dictionary<TileLayer, Tilemap> Tilemaps;
     HashSet<TileCoord> NeutralizedTiles;
+    HashSet<TileCoord> EnemyTiles;
     Grid Grid;
 
     [Serializable]
@@ -183,6 +184,7 @@ public class GridManager : MonoBehaviour
         var tileMaps = FindObjectsOfType<Tilemap>();
 
         NeutralizedTiles = new HashSet<TileCoord>();
+        EnemyTiles = new HashSet<TileCoord>();
         Tilemaps = new Dictionary<TileLayer, Tilemap>();
         foreach (var map in tileMaps)
         {
@@ -315,6 +317,16 @@ public class GridManager : MonoBehaviour
     public bool IsTileNeutralized(TileCoord coord)
     {
         return NeutralizedTiles.Contains(coord);
+    }
+
+    public void SetEnemyTile(TileCoord coord)
+    {
+        EnemyTiles.Add(coord);
+    }
+
+    public bool IsTileEnemy(TileCoord coord)
+    {
+        return EnemyTiles.Contains(coord);
     }
 
     public bool IsBlocking(TileCoord t)

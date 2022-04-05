@@ -61,13 +61,21 @@ public class UIManager : MonoBehaviour
         UncoverOverlay();
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            OnBackClicked();
+            return;
+        }
+    }
 
     public bool HighlightTile(Vector3 position)
     {
         GridHighlight.gameObject.SetActive(true);
         var coord = Grid.GetTileCoordFromWorld(position);
         var objectTile = Grid.GetTile(coord, TileLayer.OBJECT);
-        bool validPlacement = !Grid.IsBlocking(coord) && objectTile.Equals(TileType.EMPTY);
+        bool validPlacement = !Grid.IsBlocking(coord) && objectTile.Equals(TileType.EMPTY) && !Grid.IsTileEnemy(coord);
 
         if (validPlacement)
         {
@@ -128,7 +136,6 @@ public class UIManager : MonoBehaviour
     {
         RestartLevel();
     }
-
 
     void OnBackClicked()
     {
