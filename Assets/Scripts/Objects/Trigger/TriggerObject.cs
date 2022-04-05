@@ -4,8 +4,8 @@ using UnityEngine;
 public abstract class TriggerObject : CuriousInterest
 {
     [SerializeField] Triggerable objectToTrigger;
-    [SerializeField] Sprite offState;
-    [SerializeField] Sprite onState;
+    [SerializeField] protected Sprite offState;
+    [SerializeField] protected Sprite onState;
 
     private void Awake()
     {
@@ -17,15 +17,18 @@ public abstract class TriggerObject : CuriousInterest
         onTriggerInteract();
     }
 
-    private void onTriggerInteract()
+    protected void onTriggerInteract()
     {
-        GetComponent<SpriteRenderer>().sprite = onState;
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = spriteRenderer.sprite.name == onState.name ? offState : onState;
         GetComponent<AudioSource>().Play();
         Invoke("WaitForTrigger", 0.5f);
     }
 
     private void WaitForTrigger()
     {
-        objectToTrigger.Trigger();
+        if (objectToTrigger != null) {
+            objectToTrigger.Trigger();
+        }
     }
 }

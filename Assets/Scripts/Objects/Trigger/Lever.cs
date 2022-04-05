@@ -13,6 +13,7 @@ public class Lever : TriggerObject {
     private void OnMouseDown()
     {
         objectToToggle.Toggle();
+        onTriggerInteract();
     }
 
 
@@ -31,7 +32,9 @@ public class Lever : TriggerObject {
 
     public override void Interact(Adventurer adventurer)
     {
+
         objectToToggle.Toggle();
+        onTriggerInteract();
     }
 
     //public override void Interact(Adventurer adventurer)
