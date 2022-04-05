@@ -5,7 +5,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
-    public const int MAX_LEVELS = 10;
+    public const int MAX_LEVEL = 9;
 
     public Escape Escape { get; private set; }
     int AdventurersRemaining;
@@ -91,7 +91,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(int levelNum)
     {
-        SceneManager.LoadScene("Scenes/Levels/" + levelNum);
+        SceneManager.LoadScene(levelNum);
         MusicMixer.instance.QueueLow();
     }
 }
