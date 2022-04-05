@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class LevelButton : MonoBehaviour
 {
     [SerializeField] Color HoverColor;
+    [SerializeField] Color HighlightColor;
     [SerializeField] int Level;
     Color originalColor;
     Text text;
@@ -49,6 +50,13 @@ public class LevelButton : MonoBehaviour
         {
             text.text = "Level " + level;
         }
+    }
+
+    public void SetCurrent()
+    {
+        //originalColor = HighlightColor;
+        //text = GetComponent<Text>();
+        //text.color = HighlightColor;
     }
 
     IEnumerator BlinkAndSelectLevel()

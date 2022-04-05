@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HoverColor: {r: 1, g: 0.33490568, b: 0.33490568, a: 1}
+  HighlightColor: {r: 1, g: 0, b: 0, a: 1}
   Level: 0
 --- !u!114 &374024295956702763
 MonoBehaviour:

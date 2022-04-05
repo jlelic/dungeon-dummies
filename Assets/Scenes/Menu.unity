@@ -887,9 +887,7 @@ PrefabInstance:
 
         allinius
 
-        saviqq
-
-        @github'
+        saviqq'
       objectReference: {fileID: 0}
     - target: {fileID: 374024295956702760, guid: c89cfb1f6b4cae442b779a956490bc75, type: 3}
       propertyPath: m_FontData.m_FontSize

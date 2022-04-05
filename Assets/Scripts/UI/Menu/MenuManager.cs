@@ -32,7 +32,7 @@ public class MenuManager : MonoBehaviour
         }
 
         int maxLevel = PlayerPrefs.GetInt("maxLevel", 1);
-        for (int i = 1; i <= maxLevel; i++)
+        for (int i = 1; i <= 10; i++)
         {
             var newButtonObject = Instantiate(LevelButtonPrefab);
             newButtonObject.transform.SetParent(LevelGridContainer.transform,false);
@@ -40,6 +40,10 @@ public class MenuManager : MonoBehaviour
             //newButtonObject.transform.position = Vector3.zero;
             var button = newButtonObject.GetComponent<LevelButton>();
             button.SetLevelNumber(i);
+            if (i == maxLevel)
+            {
+                button.SetCurrent();
+            }
         }
     }
 

@@ -247,7 +247,7 @@ public class Adventurer : MonoBehaviour
 
     IEnumerator Thinking(float time)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSecondsRealtime(time / Time.timeScale);
         State = AdventurerState.Idle;
     }
 
@@ -262,7 +262,7 @@ public class Adventurer : MonoBehaviour
         {
             time += 5;
             progressBar.UpdateProgresBar(time);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSecondsRealtime(0.05f / Time.timeScale);
         }
         interest.Interact(this);
         OnInterestedInteracted(interest);

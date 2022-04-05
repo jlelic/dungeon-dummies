@@ -12,7 +12,6 @@ public class FireFromWall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other);
         if (other.gameObject.tag == "Adventurer")
         {
             other.gameObject.GetComponent<Adventurer>().Burn();

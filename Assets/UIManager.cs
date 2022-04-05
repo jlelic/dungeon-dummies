@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] UIButton ButtonRestart;
     [SerializeField] UIButton ButtonPlay;
     [SerializeField] UIButton ButtonFast;
+    [SerializeField] UIButton ButtonBack;
     [SerializeField] Text LevelEndText;
     [SerializeField] GameObject LevelEndAnimation;
     [SerializeField] GameObject Borders;
@@ -53,6 +54,7 @@ public class UIManager : MonoBehaviour
         ButtonFast.AddOnClickListener(OnFastClicked);
         ButtonPlay.AddOnClickListener(OnPlayClicked);
         ButtonRestart.AddOnClickListener(OnRestartClicked);
+        ButtonBack.AddOnClickListener(OnBackClicked);
 
         SetShowControlButtons(false);
 
@@ -125,6 +127,15 @@ public class UIManager : MonoBehaviour
     void OnRestartClicked()
     {
         RestartLevel();
+    }
+
+
+    void OnBackClicked()
+    {
+        InvokeAfterOverlay(-0.2f, () => {
+            LevelManager.Instance.LoadLevel(0);
+            MusicMixer.instance.PlayFullSong();
+        });
     }
 
     void InvokeAfterOverlay(float delay, Action callback)
