@@ -20,6 +20,7 @@ public class FinalCutscene : MonoBehaviour
     {
         iTween.MoveTo(camera.gameObject, new Vector3(5, -4.5f,-5), 10);
         yield return new WaitForSeconds(9);
+        MusicMixer.instance.QueueEnd();
         foreach(var h in ha)
         {
             h.SetActive(true);
@@ -34,6 +35,7 @@ public class FinalCutscene : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(3f);
         SceneManager.LoadScene(0);
+        MusicMixer.instance.PlayFullSong();
     }
 
 }
